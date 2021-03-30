@@ -29,7 +29,7 @@ class UdacityAPI {
     
  
     
-    func login(_ email: String,_ password: String, completion: @escaping (Bool, Error?)->()) {
+    class func login(_ email: String,_ password: String, completion: @escaping (Bool, Error?)->()) {
         
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "POST"

@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
   
 
     @IBAction func loginButtonPressed(_ sender: Any) {
-        UdacityAPI.sharedAPI.login(emailTextField.text!, passwordTextField.text!) { (successful, error) in
+        UdacityAPI.login(emailTextField.text!, passwordTextField.text!) { (successful, error) in
             if let error = error {
                 print(error.localizedDescription)
                 let errorAlert = UIAlertController(title: "Error", message: "Houston, there is a problem", preferredStyle: .alert)
@@ -41,6 +41,9 @@ class LoginViewController: UIViewController {
                 }))
                 self.present(errorAlert, animated: true, completion: nil)
             }
+            
+            let map = self.storyboard?.instantiateViewController(identifier: "TabBarController") as! UITabBarController
+            self.present(map, animated: true, completion: nil)
         }
         
         

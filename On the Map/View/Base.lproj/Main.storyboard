@@ -97,6 +97,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="tIn-ug-EaS"/>
+                    <connections>
+                        <outlet property="tableViewStudent" destination="vQg-hf-ldi" id="7kc-G5-Odq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9YL-we-TCT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -105,7 +108,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="abj-E4-10j">
             <objects>
-                <tabBarController id="VVX-31-lVz" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="VVX-31-lVz" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ySb-3x-i3L"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="M0R-qZ-Smq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>

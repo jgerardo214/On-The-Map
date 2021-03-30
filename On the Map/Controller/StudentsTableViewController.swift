@@ -8,9 +8,19 @@
 import Foundation
 import UIKit
 
-struct StudentsTableViewController {
+class StudentsTableViewController {
+    
+    
     
     var results = [StudentInformation]()
+
+    @IBOutlet var tableViewStudent: UITableView!
+    
+    
+    
+    
+    
+    
     
     
     
