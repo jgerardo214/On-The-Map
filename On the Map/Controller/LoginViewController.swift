@@ -52,6 +52,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func signupButtonPressed(_ sender: Any) {
         
+        guard let url = URL(string: "https://www.udacity.com/account/auth#!/signup")
+        else {
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        
     }
     
     func handleLoginResponse(success: Bool, error: Error?) {

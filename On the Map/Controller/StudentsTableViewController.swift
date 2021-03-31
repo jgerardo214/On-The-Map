@@ -17,11 +17,5 @@ class StudentsTableViewController {
     @IBOutlet var tableViewStudent: UITableView!
     
     
-    
-    
-    
-    
-    
-    
-    
+
 }

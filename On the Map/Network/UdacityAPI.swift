@@ -39,6 +39,7 @@ class UdacityAPI {
         
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
+                
           if error != nil { // Handle error…
               return
           }
@@ -51,7 +52,11 @@ class UdacityAPI {
     }
     
     
+    // TODO: create func to add Student location
     
+    // TODO: create logout function
+    
+    // 
     
     
 

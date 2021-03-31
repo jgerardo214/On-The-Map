@@ -16,6 +16,8 @@
 		FD3EE0F426104D4000D60112 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3EE0F326104D4000D60112 /* LoginRequest.swift */; };
 		FD3EE10226119DF600D60112 /* MapsLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3EE10126119DF600D60112 /* MapsLocationVC.swift */; };
 		FD5A96BA2612FAD300DE9AFA /* StudentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5A96B92612FAD300DE9AFA /* StudentsTableViewController.swift */; };
+		FD5A96BF2613FC8000DE9AFA /* DataViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5A96BE2613FC8000DE9AFA /* DataViewCell.swift */; };
+		FD5A96C72614121300DE9AFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5A96C62614121300DE9AFA /* MapViewController.swift */; };
 		FD82D043260AEB2800DF1AF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD82D042260AEB2800DF1AF5 /* AppDelegate.swift */; };
 		FD82D045260AEB2800DF1AF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD82D044260AEB2800DF1AF5 /* SceneDelegate.swift */; };
 		FD82D04A260AEB2800DF1AF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD82D048260AEB2800DF1AF5 /* Main.storyboard */; };
@@ -52,6 +54,8 @@
 		FD5A96B72612F7E000DE9AFA /* On the MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On the MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD5A96B82612F7E000DE9AFA /* On the MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On the MapUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD5A96B92612FAD300DE9AFA /* StudentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
+		FD5A96BE2613FC8000DE9AFA /* DataViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewCell.swift; sourceTree = "<group>"; };
+		FD5A96C62614121300DE9AFA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FD82D042260AEB2800DF1AF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD82D044260AEB2800DF1AF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FD82D049260AEB2800DF1AF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				FD82D07D260AF31400DF1AF5 /* Controller */,
 				FD82D04D260AEB2B00DF1AF5 /* LaunchScreen.storyboard */,
 				FD82D050260AEB2B00DF1AF5 /* Info.plist */,
+				FD82D048260AEB2800DF1AF5 /* Main.storyboard */,
+				FD82D04B260AEB2B00DF1AF5 /* Assets.xcassets */,
 			);
 			path = "On the Map";
 			sourceTree = "<group>";
@@ -132,8 +138,7 @@
 		FD82D07C260AF30E00DF1AF5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FD82D048260AEB2800DF1AF5 /* Main.storyboard */,
-				FD82D04B260AEB2B00DF1AF5 /* Assets.xcassets */,
+				FD5A96BE2613FC8000DE9AFA /* DataViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 				FD3EE0B5260D98D000D60112 /* MapTableVC.swift */,
 				FD3EE10126119DF600D60112 /* MapsLocationVC.swift */,
 				FD5A96B92612FAD300DE9AFA /* StudentsTableViewController.swift */,
+				FD5A96C62614121300DE9AFA /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,9 +288,11 @@
 			files = (
 				FD3EE0DC260DA31000D60112 /* UdacityAPI.swift in Sources */,
 				FD3EE0C4260D990700D60112 /* StudentInformation.swift in Sources */,
+				FD5A96BF2613FC8000DE9AFA /* DataViewCell.swift in Sources */,
 				FD3EE0B8260D98D000D60112 /* MapTableVC.swift in Sources */,
 				FD3EE0F426104D4000D60112 /* LoginRequest.swift in Sources */,
 				FD3EE10226119DF600D60112 /* MapsLocationVC.swift in Sources */,
+				FD5A96C72614121300DE9AFA /* MapViewController.swift in Sources */,
 				FD5A96BA2612FAD300DE9AFA /* StudentsTableViewController.swift in Sources */,
 				FD3EE0C5260D990700D60112 /* StudentLocation.swift in Sources */,
 				FD3EE0B6260D98D000D60112 /* InformationPostingVC.swift in Sources */,
