@@ -24,10 +24,13 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTextField.text = ""
-        passwordTextField.text = ""
+        DispatchQueue.main.async {
+            self.emailTextField.becomeFirstResponder()
+        }
         
     }
+    
+  
     
   
 

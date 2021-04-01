@@ -51,8 +51,8 @@
 		FD3EE0DB260DA31000D60112 /* UdacityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPI.swift; sourceTree = "<group>"; };
 		FD3EE0F326104D4000D60112 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		FD3EE10126119DF600D60112 /* MapsLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsLocationVC.swift; sourceTree = "<group>"; };
-		FD5A96B72612F7E000DE9AFA /* On the MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On the MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD5A96B82612F7E000DE9AFA /* On the MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On the MapUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD5A96B72612F7E000DE9AFA /* On the MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "On the MapTests.xctest"; path = "/Users/jonathangerardo/Desktop/On the Map_/On-The-Map/build/Debug-iphoneos/On the MapTests.xctest"; sourceTree = "<absolute>"; };
+		FD5A96B82612F7E000DE9AFA /* On the MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "On the MapUITests.xctest"; path = "/Users/jonathangerardo/Desktop/On the Map_/On-The-Map/build/Debug-iphoneos/On the MapUITests.xctest"; sourceTree = "<absolute>"; };
 		FD5A96B92612FAD300DE9AFA /* StudentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsTableViewController.swift; sourceTree = "<group>"; };
 		FD5A96BE2613FC8000DE9AFA /* DataViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewCell.swift; sourceTree = "<group>"; };
 		FD5A96C62614121300DE9AFA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -103,8 +103,6 @@
 			children = (
 				FD82D041260AEB2800DF1AF5 /* On the Map */,
 				FD82D07E260BADBB00DF1AF5 /* On the Map.app */,
-				FD5A96B72612F7E000DE9AFA /* On the MapTests.xctest */,
-				FD5A96B82612F7E000DE9AFA /* On the MapUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,9 +115,9 @@
 				FD82D07B260AF30600DF1AF5 /* Model */,
 				FD82D07C260AF30E00DF1AF5 /* View */,
 				FD82D07D260AF31400DF1AF5 /* Controller */,
+				FD82D048260AEB2800DF1AF5 /* Main.storyboard */,
 				FD82D04D260AEB2B00DF1AF5 /* LaunchScreen.storyboard */,
 				FD82D050260AEB2B00DF1AF5 /* Info.plist */,
-				FD82D048260AEB2800DF1AF5 /* Main.storyboard */,
 				FD82D04B260AEB2B00DF1AF5 /* Assets.xcassets */,
 			);
 			path = "On the Map";
@@ -146,8 +144,8 @@
 		FD82D07D260AF31400DF1AF5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FD3EE0B3260D98CF00D60112 /* InformationPostingVC.swift */,
 				FD3EE0B4260D98D000D60112 /* LoginViewController.swift */,
+				FD3EE0B3260D98CF00D60112 /* InformationPostingVC.swift */,
 				FD3EE0B5260D98D000D60112 /* MapTableVC.swift */,
 				FD3EE10126119DF600D60112 /* MapsLocationVC.swift */,
 				FD5A96B92612FAD300DE9AFA /* StudentsTableViewController.swift */,
