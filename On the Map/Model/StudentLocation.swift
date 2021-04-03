@@ -27,7 +27,3 @@ struct StudentLocation: Codable {
     
 }
 
-struct Result: Codable {
-    
-    let results: [StudentInformation]?
-}

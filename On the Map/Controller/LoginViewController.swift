@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 
 class LoginViewController: UIViewController {
     
@@ -21,61 +22,33 @@ class LoginViewController: UIViewController {
         passwordTextField.text = ""
         
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async {
-            self.emailTextField.becomeFirstResponder()
-        }
         
     }
     
-  
     
-  
-
+    
     @IBAction func loginButtonPressed(_ sender: Any) {
-        UdacityAPI.login(emailTextField.text!, passwordTextField.text!) { (successful, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                let errorAlert = UIAlertController(title: "Error", message: "Houston, there is a problem", preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in return
-                    
-                }))
-                self.present(errorAlert, animated: true, completion: nil)
-            }
-            
-            let map = self.storyboard?.instantiateViewController(identifier: "TabBarController") as! UITabBarController
-            self.present(map, animated: true, completion: nil)
-        }
         
-        
-       
+        UdacityAPI.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
     }
     
     @IBAction func signupButtonPressed(_ sender: Any) {
         
-        guard let url = URL(string: "https://www.udacity.com/account/auth#!/signup")
-        else {
-            return
-        }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        UIApplication.shared.open(URL(string: "https://auth.udacity.com/sign-up")!, options: [:], completionHandler: nil)
         
     }
+    
     
     func handleLoginResponse(success: Bool, error: Error?) {
         if success {
             DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "login", sender: nil)
+                self.performSegue(withIdentifier: "loginSuccessful", sender: nil)
             }
         }
     }
     
-    func setLoggingIn(_ logginIn: Bool) {
-        emailTextField.isEnabled = !logginIn
-        passwordTextField.isEnabled = !logginIn
-        loginButton.isEnabled = !logginIn
-        
-    }
+    
 }
-

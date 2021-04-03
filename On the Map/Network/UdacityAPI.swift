@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UIKit
+
 
     
 class UdacityAPI {
@@ -45,39 +47,77 @@ class UdacityAPI {
         }
     }
     
+    
+    
  
     
-    class func login(_ email: String,_ password: String, completion: @escaping (Bool, Error?)->()) {
+    class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> ()) {
             
-            var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
+        var request = URLRequest(url: Endpoints.createSessionId.url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: .utf8)
             
-            let session = URLSession.shared
-            let task = session.dataTask(with: request) { data, response, error in
-                    
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+            
+                func showError(_ error: String){
+                    print(error)
+                }
+                guard (error == nil) else {
+                    completion (false, error)
+                    return
+                }
+                
+                guard let data = data else {
+                    showError("there is no data")
+                    return
+                }
+                
               if error != nil { // Handle error…
                   return
               }
-              let range = (5..<data!.count)
-              let newData = data?.subdata(in: range) /* subset response data! */
-              print(String(data: newData!, encoding: .utf8)!)
+                let range = (5..<data.count)
+                let newData = data.subdata(in: range)
+                print(String(data: newData, encoding: .utf8)!)
             }
             task.resume()
+            
             
         }
         
         
-        // TODO: create func to add Student location
+       
+    class func getStudentLocation(student: Bool, completion: @escaping ([StudentLocation]?, Error?) -> Void) {
+    
+        let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation?order=-updatedAt")!)
+    let session = URLSession.shared
+    let task = session.dataTask(with: request) { data, response, error in
+      if error != nil { // Handle error...
+          return
+      }
+      print(String(data: data!, encoding: .utf8)!)
+    }
+    task.resume()
+    
+    }
+    
+    class func postStudentLocation(student: Bool, completion: @escaping ([StudentLocation]?, Error?) -> Void) {
+        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: .utf8)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+          if error != nil { // Handle error…
+              return
+          }
+          print(String(data: data!, encoding: .utf8)!)
+        }
+        task.resume()
         
-        // TODO: create logout function
         
-        //
-        
-        
-
+    }
         
         
         
