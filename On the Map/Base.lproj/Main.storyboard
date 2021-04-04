@@ -39,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="DataCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DataCell" id="omH-nG-dkM" customClass="DataViewCell" customModule="On_the_Map" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" id="omH-nG-dkM">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="omH-nG-dkM" id="X8s-FN-oXf">
@@ -89,7 +89,7 @@
                     <navigationItem key="navigationItem" title="List" id="tIn-ug-EaS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tableViewStudent" destination="vQg-hf-ldi" id="7kc-G5-Odq"/>
+                        <outlet property="tableView" destination="omH-nG-dkM" id="W6p-Wg-EEB"/>
                         <segue destination="z1V-SJ-9fj" kind="show" identifier="addLocation" id="z6s-pI-Ial"/>
                     </connections>
                 </tableViewController>
@@ -183,6 +183,10 @@
                                     <action selector="signupButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bQd-Fb-PbO"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Fvs-ZE-KoU">
+                                <rect key="frame" x="197" y="418" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -204,6 +208,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5w8-Mq-agI"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Fvs-ZE-KoU" id="Mt4-cj-BPp"/>
                         <outlet property="emailTextField" destination="zR7-De-Dzf" id="da6-8M-tCi"/>
                         <outlet property="loginButton" destination="TL8-BG-HzS" id="C5W-xJ-zAc"/>
                         <outlet property="passwordTextField" destination="38g-nq-S5H" id="RS1-dc-KGg"/>
@@ -347,10 +352,10 @@
             </objects>
             <point key="canvasLocation" x="5062" y="495"/>
         </scene>
-        <!--View Controller-->
+        <!--Location FinalizedVC-->
         <scene sceneID="TCF-Wc-JRh">
             <objects>
-                <viewController id="4P5-bb-TSp" sceneMemberID="viewController">
+                <viewController id="4P5-bb-TSp" customClass="LocationFinalizedVC" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S04-BQ-MAI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -370,6 +375,9 @@
                                 <state key="normal" title="Finish">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="finishButtonPressed:" destination="4P5-bb-TSp" eventType="touchUpInside" id="6vu-no-h0i"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NYa-YA-Ijz"/>
@@ -390,6 +398,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pIL-Kk-Y7t"/>
+                    <connections>
+                        <outlet property="FinalizedMap" destination="f3a-MH-cBf" id="4Xk-LV-Dtc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ou2-M6-VWS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -414,7 +425,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Kxb-yp-Ipu"/>
+        <segue reference="z6s-pI-Ial"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>

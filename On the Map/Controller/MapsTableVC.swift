@@ -10,11 +10,14 @@ import UIKit
 
 class MapsTableVC: UIViewController {
     
+   
+    @IBOutlet weak var tableView: UITableViewCell!
+    
+    
     
     
     var results = [StudentInformation]()
 
-    @IBOutlet var tableViewStudent: UITableView!
     
     
 

@@ -7,11 +7,16 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 class LocationFinalizedVC: UIViewController {
     
     
+    @IBOutlet weak var FinalizedMap: MKMapView!
     
     
+    @IBAction func finishButtonPressed(_ sender: Any) {
+        
+    }
     
 }
