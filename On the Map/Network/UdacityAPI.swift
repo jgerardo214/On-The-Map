@@ -22,7 +22,7 @@ class UdacityAPI {
         
         case createSessionId
         case getStudentLocation(Int)
-        case getOneStduentLocation(String)
+        case getSingleStudentLocation(String)
         case postStudentLocation
         case updateStudentLocation(String)
         case getUserData
@@ -33,7 +33,7 @@ class UdacityAPI {
             
             case .createSessionId: return Endpoints.base + "session"
             case .getStudentLocation(let index): return Endpoints.base + "StudentLocation" + "?limit=100&skip=\(index)&order=-updatedAt"
-            case .getOneStduentLocation(let uniqueKey): return Endpoints.base + "StudentLocation?uniqueKey=\(uniqueKey)"
+            case .getSingleStudentLocation(let uniqueKey): return Endpoints.base + "StudentLocation?uniqueKey=\(uniqueKey)"
             case .postStudentLocation: return Endpoints.base + "StudentLocation"
             case .updateStudentLocation(let objectID): return Endpoints.base + "StudentLocation/\(objectID)"
             case .getUserData: return Endpoints.base + "users/" + Auth.keyAccount
@@ -160,6 +160,35 @@ class UdacityAPI {
           let range = (5..<data!.count)
           let newData = data?.subdata(in: range) /* subset response data! */
           print(String(data: newData!, encoding: .utf8)!)
+        }
+        task.resume()
+        
+        
+    }
+    
+    class func getUserData(completion: @escaping (UserData?, Error?) -> Void) {
+        let task = URLSession.shared.dataTask(with: Endpoints.getUserData.url) { (data, response, error) in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            let range = 5..<data.count
+            let newData = data.subdata(in: range)
+            let decoder = JSONDecoder()
+            do {
+                let requestObject = try decoder.decode(UserData.self, from: newData)
+                DispatchQueue.main.async {
+                    print(newData)
+                    completion(requestObject, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
+            
         }
         task.resume()
         

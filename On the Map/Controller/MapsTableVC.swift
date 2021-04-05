@@ -10,17 +10,16 @@ import UIKit
 
 class MapsTableVC: UIViewController {
     
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
+    @IBOutlet weak var addPinButton: UIBarButtonItem!
+    @IBOutlet var tableView: UITableView!
     
     
-    @IBOutlet weak var tableView: UITableViewCell!
-    @IBOutlet weak var refreshButtonPressed: UIBarButtonItem!
-    @IBOutlet weak var addButtonPressed: UIBarButtonItem!
-    
-    @IBOutlet weak var logoutButtonPressed: UIBarButtonItem!
     
     var results = [StudentInformation]()
 
     
     
 
+    
 }

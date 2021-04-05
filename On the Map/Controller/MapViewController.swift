@@ -16,17 +16,16 @@ class MapViewController: UIViewController {
     
     
     
-    @IBAction func addNewLocationPressed(_ sender: Any) {
+    @IBAction func addLocationPressed(_ sender: Any) {
         
-    }
+        
+        }
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
         
     }
     
-    @IBAction func logoutButtonPressed(_ sender: Any) {
-        
-    }
+
     
 }
 

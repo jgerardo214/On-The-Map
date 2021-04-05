@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 struct StudentLocation: Codable {
     
     static var lastFeched: [StudentLocation]?

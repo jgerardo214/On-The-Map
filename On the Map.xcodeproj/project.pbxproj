@@ -16,6 +16,7 @@
 		FD3EE10226119DF600D60112 /* MapsLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3EE10126119DF600D60112 /* MapsLocationVC.swift */; };
 		FD54BC8426183AFD00448212 /* LocationFinalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54BC8326183AFD00448212 /* LocationFinalized.swift */; };
 		FD54BC93261AC09200448212 /* PostLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54BC92261AC09200448212 /* PostLocation.swift */; };
+		FD54BC98261AD31C00448212 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD54BC97261AD31C00448212 /* UserData.swift */; };
 		FD5A96BA2612FAD300DE9AFA /* MapsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5A96B92612FAD300DE9AFA /* MapsTableVC.swift */; };
 		FD5A96C72614121300DE9AFA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5A96C62614121300DE9AFA /* MapViewController.swift */; };
 		FD82D043260AEB2800DF1AF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD82D042260AEB2800DF1AF5 /* AppDelegate.swift */; };
@@ -54,6 +55,7 @@
 		FD54BC7C2618303B00448212 /* On the MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On the MapUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD54BC8326183AFD00448212 /* LocationFinalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFinalized.swift; sourceTree = "<group>"; };
 		FD54BC92261AC09200448212 /* PostLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocation.swift; sourceTree = "<group>"; };
+		FD54BC97261AD31C00448212 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		FD5A96B92612FAD300DE9AFA /* MapsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsTableVC.swift; sourceTree = "<group>"; };
 		FD5A96C62614121300DE9AFA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FD82D042260AEB2800DF1AF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,12 +114,12 @@
 		FD82D041260AEB2800DF1AF5 /* On the Map */ = {
 			isa = PBXGroup;
 			children = (
-				FD82D042260AEB2800DF1AF5 /* AppDelegate.swift */,
+				FD82D048260AEB2800DF1AF5 /* Main.storyboard */,
 				FD82D044260AEB2800DF1AF5 /* SceneDelegate.swift */,
+				FD82D042260AEB2800DF1AF5 /* AppDelegate.swift */,
 				FD3EE0FA2610551E00D60112 /* Network */,
 				FD82D07B260AF30600DF1AF5 /* Model */,
 				FD82D07D260AF31400DF1AF5 /* Controller */,
-				FD82D048260AEB2800DF1AF5 /* Main.storyboard */,
 				FD82D04D260AEB2B00DF1AF5 /* LaunchScreen.storyboard */,
 				FD82D050260AEB2B00DF1AF5 /* Info.plist */,
 				FD82D04B260AEB2B00DF1AF5 /* Assets.xcassets */,
@@ -131,6 +133,7 @@
 				FD3EE0C2260D990700D60112 /* StudentInformation.swift */,
 				FD3EE0C3260D990700D60112 /* StudentLocation.swift */,
 				FD54BC92261AC09200448212 /* PostLocation.swift */,
+				FD54BC97261AD31C00448212 /* UserData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 			files = (
 				FD3EE0DC260DA31000D60112 /* UdacityAPI.swift in Sources */,
 				FD3EE0C4260D990700D60112 /* StudentInformation.swift in Sources */,
+				FD54BC98261AD31C00448212 /* UserData.swift in Sources */,
 				FD3EE0F426104D4000D60112 /* LoginRequest.swift in Sources */,
 				FD3EE10226119DF600D60112 /* MapsLocationVC.swift in Sources */,
 				FD54BC8426183AFD00448212 /* LocationFinalized.swift in Sources */,
