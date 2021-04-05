@@ -87,7 +87,14 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-deselected" id="dTd-CK-6xm"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="List" id="tIn-ug-EaS"/>
+                    <navigationItem key="navigationItem" title="List" id="tIn-ug-EaS">
+                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="weD-1Z-snx"/>
+                        <rightBarButtonItems>
+                            <barButtonItem id="cou-QL-RGS"/>
+                            <barButtonItem image="icon_addpin" id="BQP-Oc-kEa"/>
+                            <barButtonItem image="icon_refresh" id="eor-0m-SJn"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="z1V-SJ-9fj" kind="show" identifier="addLocation" id="z6s-pI-Ial"/>
@@ -220,7 +227,7 @@
             </objects>
             <point key="canvasLocation" x="-1375" y="457"/>
         </scene>
-        <!--Map View Controller-->
+        <!--On the Map-->
         <scene sceneID="QCR-ND-gPi">
             <objects>
                 <viewController id="0o4-fA-v9V" customClass="MapViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
@@ -228,48 +235,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ezt-sj-feW">
-                                <rect key="frame" x="0.0" y="63" width="414" height="56"/>
-                                <items>
-                                    <navigationItem title="On the Map" id="YD0-CA-7dL">
-                                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="JMy-Ro-V9U">
-                                            <connections>
-                                                <action selector="logoutButtonPressed:" destination="0o4-fA-v9V" id="gn3-IN-LpO"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <rightBarButtonItems>
-                                            <barButtonItem title="Item" image="icon_addpin" id="JOx-cz-iZz">
-                                                <connections>
-                                                    <action selector="addNewLocationPressed:" destination="0o4-fA-v9V" id="KFK-W7-1fp"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem title="Item" image="icon_refresh" id="0nV-YC-HeN">
-                                                <connections>
-                                                    <action selector="refreshButtonPressed:" destination="0o4-fA-v9V" id="Ob0-dg-elz"/>
-                                                </connections>
-                                            </barButtonItem>
-                                        </rightBarButtonItems>
-                                    </navigationItem>
-                                </items>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ezt-sj-feW">
+                                <rect key="frame" x="0.0" y="75" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oGk-Fm-3Vc">
-                                <rect key="frame" x="0.0" y="119" width="414" height="640"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
                             </mapView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VnQ-ET-jK7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="trailing" secondItem="ezt-sj-feW" secondAttribute="trailing" id="1VK-04-dt2"/>
-                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="leading" secondItem="ezt-sj-feW" secondAttribute="leading" id="65g-4c-lFS"/>
-                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="bottom" secondItem="VnQ-ET-jK7" secondAttribute="bottom" id="M9l-wm-T2L"/>
-                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="trailing" secondItem="VnQ-ET-jK7" secondAttribute="trailing" id="fQ5-Z4-zbN"/>
-                            <constraint firstItem="ezt-sj-feW" firstAttribute="top" secondItem="VnQ-ET-jK7" secondAttribute="top" constant="7" id="rXM-jA-G92"/>
-                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="top" secondItem="ezt-sj-feW" secondAttribute="bottom" id="sXD-kX-jrg"/>
-                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="leading" secondItem="VnQ-ET-jK7" secondAttribute="leading" id="zJa-7b-ovW"/>
+                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="bottom" secondItem="VnQ-ET-jK7" secondAttribute="bottom" id="6AJ-jq-GEI"/>
+                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="leading" secondItem="VnQ-ET-jK7" secondAttribute="leading" id="8qw-C6-aLx"/>
+                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="top" secondItem="VnQ-ET-jK7" secondAttribute="top" id="RhL-Nr-U0P"/>
+                            <constraint firstItem="oGk-Fm-3Vc" firstAttribute="trailing" secondItem="VnQ-ET-jK7" secondAttribute="trailing" id="T9M-5l-Jov"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon_mapview-deselected" id="VdC-uI-bhl"/>
-                    <navigationItem key="navigationItem" id="S4m-xi-85u"/>
+                    <navigationItem key="navigationItem" title="On the Map" id="YD0-CA-7dL">
+                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="JMy-Ro-V9U">
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="0o4-fA-v9V" id="gn3-IN-LpO"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="icon_addpin" id="JOx-cz-iZz">
+                                <connections>
+                                    <action selector="addNewLocationPressed:" destination="0o4-fA-v9V" id="KFK-W7-1fp"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="icon_refresh" id="0nV-YC-HeN">
+                                <connections>
+                                    <action selector="refreshButtonPressed:" destination="0o4-fA-v9V" id="Ob0-dg-elz"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="oGk-Fm-3Vc" id="UbG-Nf-28B"/>
@@ -425,7 +427,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="z6s-pI-Ial"/>
+        <segue reference="Kxb-yp-Ipu"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>

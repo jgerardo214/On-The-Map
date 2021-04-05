@@ -31,6 +31,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.activityIndicator.isHidden = true
+        self.activityIndicator.hidesWhenStopped = true
         
         
         
@@ -68,16 +70,14 @@ class LoginViewController: UIViewController {
     }
     
     func setLoggingIn(_ loggingIn: Bool) {
-        
-        if loggingIn {
-            DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            if loggingIn {
                 self.activityIndicator.startAnimating()
-            }
-        } else {
-            DispatchQueue.main.async {
+            } else {
                 self.activityIndicator.stopAnimating()
             }
         }
+       
     }
     
 }
