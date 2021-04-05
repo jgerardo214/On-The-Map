@@ -79,6 +79,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="LI3-PC-5Wa" id="8DF-OK-Dk5"/>
                             <outlet property="delegate" destination="LI3-PC-5Wa" id="svU-5j-RVq"/>
@@ -89,7 +90,6 @@
                     <navigationItem key="navigationItem" title="List" id="tIn-ug-EaS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tableView" destination="omH-nG-dkM" id="W6p-Wg-EEB"/>
                         <segue destination="z1V-SJ-9fj" kind="show" identifier="addLocation" id="z6s-pI-Ial"/>
                     </connections>
                 </tableViewController>
