@@ -88,7 +88,11 @@
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-deselected" id="dTd-CK-6xm"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="tIn-ug-EaS">
-                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="cou-QL-RGS"/>
+                        <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="cou-QL-RGS">
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="LI3-PC-5Wa" id="sXm-RG-YuK"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="AddPin" image="icon_addpin" id="BQP-Oc-kEa"/>
                             <barButtonItem title="Refresh" image="icon_refresh" id="eor-0m-SJn"/>
@@ -108,7 +112,7 @@
             <objects>
                 <tabBarController storyboardIdentifier="TabBarController" id="VVX-31-lVz" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ySb-3x-i3L"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="M0R-qZ-Smq">
+                    <tabBar key="tabBar" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" id="M0R-qZ-Smq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -305,14 +309,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iyK-vU-1sJ">
-                                <rect key="frame" x="0.0" y="56" width="414" height="44"/>
-                                <items>
-                                    <navigationItem title="Add Location" id="qoR-Yh-CHe">
-                                        <barButtonItem key="leftBarButtonItem" title="CANCEL" id="QqJ-Gf-uhy"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2up-am-yFH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -321,24 +317,19 @@
                             <constraint firstItem="NyX-nL-IO4" firstAttribute="top" secondItem="McM-DP-EGr" secondAttribute="bottom" constant="25" id="9Tu-7Z-KtQ"/>
                             <constraint firstItem="McM-DP-EGr" firstAttribute="leading" secondItem="2up-am-yFH" secondAttribute="leading" constant="41" id="Bp9-rn-k1f"/>
                             <constraint firstItem="Ime-ZC-ZPl" firstAttribute="leading" secondItem="2up-am-yFH" secondAttribute="leading" constant="123" id="GZv-mD-JYJ"/>
-                            <constraint firstItem="Ime-ZC-ZPl" firstAttribute="top" secondItem="iyK-vU-1sJ" secondAttribute="bottom" constant="48" id="Ihj-C6-lKk"/>
                             <constraint firstItem="2up-am-yFH" firstAttribute="trailing" secondItem="Ime-ZC-ZPl" secondAttribute="trailing" constant="123" id="MeT-2P-aLF"/>
                             <constraint firstItem="McM-DP-EGr" firstAttribute="top" secondItem="Rt3-Je-ytU" secondAttribute="top" constant="342" id="NxL-yy-m0K"/>
                             <constraint firstItem="McM-DP-EGr" firstAttribute="leading" secondItem="NyX-nL-IO4" secondAttribute="leading" id="WAR-N1-e6f"/>
                             <constraint firstItem="McM-DP-EGr" firstAttribute="leading" secondItem="a1A-gt-ZFz" secondAttribute="leading" id="afG-Aj-YF6"/>
                             <constraint firstItem="McM-DP-EGr" firstAttribute="trailing" secondItem="a1A-gt-ZFz" secondAttribute="trailing" id="cwg-t1-ZGG"/>
-                            <constraint firstItem="iyK-vU-1sJ" firstAttribute="top" secondItem="2up-am-yFH" secondAttribute="top" id="d5p-MQ-baU"/>
                             <constraint firstItem="McM-DP-EGr" firstAttribute="top" secondItem="a1A-gt-ZFz" secondAttribute="bottom" constant="8" symbolic="YES" id="kLP-cL-3PH"/>
                             <constraint firstItem="2up-am-yFH" firstAttribute="trailing" secondItem="McM-DP-EGr" secondAttribute="trailing" constant="50" id="ubt-KF-rnl"/>
-                            <constraint firstItem="iyK-vU-1sJ" firstAttribute="trailing" secondItem="2up-am-yFH" secondAttribute="trailing" id="vED-A1-Bzg"/>
                             <constraint firstItem="McM-DP-EGr" firstAttribute="trailing" secondItem="NyX-nL-IO4" secondAttribute="trailing" id="xH2-7s-O8P"/>
                             <constraint firstItem="2up-am-yFH" firstAttribute="bottom" secondItem="Ime-ZC-ZPl" secondAttribute="bottom" constant="630" id="yWa-r0-0FI"/>
-                            <constraint firstItem="iyK-vU-1sJ" firstAttribute="leading" secondItem="2up-am-yFH" secondAttribute="leading" id="yXR-Ip-s1g"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jMw-Sa-KGz"/>
                     <connections>
-                        <outlet property="cancelButton" destination="QqJ-Gf-uhy" id="mXP-6d-8Ea"/>
                         <outlet property="findLocationButton" destination="NyX-nL-IO4" id="Ph8-ez-TnG"/>
                         <outlet property="linkField" destination="McM-DP-EGr" id="eTS-We-JJ1"/>
                         <outlet property="locationField" destination="a1A-gt-ZFz" id="8CH-Bp-HaO"/>
@@ -422,7 +413,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Kxb-yp-Ipu"/>
+        <segue reference="z6s-pI-Ial"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>

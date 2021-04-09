@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD1DCD132620221A0049769F /* LogoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1DCD122620221A0049769F /* LogoutResponse.swift */; };
+		FD1DCD182620227D0049769F /* PostLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1DCD172620227D0049769F /* PostLocationResponse.swift */; };
+		FD1DCD1D262022BE0049769F /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1DCD1C262022BE0049769F /* ErrorResponse.swift */; };
+		FD1DCD22262023A90049769F /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1DCD21262023A90049769F /* ErrorMessage.swift */; };
 		FD3EE0B6260D98D000D60112 /* InformationPostingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3EE0B3260D98CF00D60112 /* InformationPostingVC.swift */; };
 		FD3EE0B7260D98D000D60112 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3EE0B4260D98D000D60112 /* LoginViewController.swift */; };
 		FD3EE0C4260D990700D60112 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3EE0C2260D990700D60112 /* StudentInformation.swift */; };
@@ -44,6 +48,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD1DCD122620221A0049769F /* LogoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutResponse.swift; sourceTree = "<group>"; };
+		FD1DCD172620227D0049769F /* PostLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationResponse.swift; sourceTree = "<group>"; };
+		FD1DCD1C262022BE0049769F /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		FD1DCD21262023A90049769F /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		FD3EE0B3260D98CF00D60112 /* InformationPostingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingVC.swift; sourceTree = "<group>"; };
 		FD3EE0B4260D98D000D60112 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FD3EE0C2260D990700D60112 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
@@ -97,6 +105,9 @@
 			children = (
 				FD3EE0DB260DA31000D60112 /* UdacityAPI.swift */,
 				FD3EE0F326104D4000D60112 /* LoginRequest.swift */,
+				FD1DCD122620221A0049769F /* LogoutResponse.swift */,
+				FD1DCD172620227D0049769F /* PostLocationResponse.swift */,
+				FD1DCD1C262022BE0049769F /* ErrorResponse.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -134,6 +145,7 @@
 				FD3EE0C3260D990700D60112 /* StudentLocation.swift */,
 				FD54BC92261AC09200448212 /* PostLocation.swift */,
 				FD54BC97261AD31C00448212 /* UserData.swift */,
+				FD1DCD21262023A90049769F /* ErrorMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -284,12 +296,16 @@
 				FD3EE0DC260DA31000D60112 /* UdacityAPI.swift in Sources */,
 				FD3EE0C4260D990700D60112 /* StudentInformation.swift in Sources */,
 				FD54BC98261AD31C00448212 /* UserData.swift in Sources */,
+				FD1DCD182620227D0049769F /* PostLocationResponse.swift in Sources */,
+				FD1DCD22262023A90049769F /* ErrorMessage.swift in Sources */,
 				FD3EE0F426104D4000D60112 /* LoginRequest.swift in Sources */,
 				FD3EE10226119DF600D60112 /* MapsLocationVC.swift in Sources */,
 				FD54BC8426183AFD00448212 /* LocationFinalized.swift in Sources */,
+				FD1DCD1D262022BE0049769F /* ErrorResponse.swift in Sources */,
 				FD5A96C72614121300DE9AFA /* MapViewController.swift in Sources */,
 				FD5A96BA2612FAD300DE9AFA /* MapsTableVC.swift in Sources */,
 				FD3EE0C5260D990700D60112 /* StudentLocation.swift in Sources */,
+				FD1DCD132620221A0049769F /* LogoutResponse.swift in Sources */,
 				FD54BC93261AC09200448212 /* PostLocation.swift in Sources */,
 				FD3EE0B6260D98D000D60112 /* InformationPostingVC.swift in Sources */,
 				FD82D043260AEB2800DF1AF5 /* AppDelegate.swift in Sources */,

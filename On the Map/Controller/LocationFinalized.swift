@@ -16,7 +16,16 @@ class LocationFinalizedVC: UIViewController {
     
     
     @IBAction func finishButtonPressed(_ sender: Any) {
-        
+        /*
+        UdacityAPI.getUserData { (userData, error) in
+            guard let data = userData else {
+                return
+            }
+            
+        }
+ */
     }
+   
+    
     
 }

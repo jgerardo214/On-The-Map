@@ -17,9 +17,29 @@ class MapsTableVC: UIViewController {
     
     
     var results = [StudentInformation]()
-
+    
+    /*
+    func getStudentData() {
+        UdacityAPI.getStudentLocation(objectID: String, completion:{ (data, error) in
+            
+            DispatchQueue.main.async {
+                guard let data = data else {
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+                
+            }
+        })
+    }
     
     
-
-    
-}
+    @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
+        UdacityAPI.deletingSession { (Bool, Error) in
+            if self.logoutButton.isEnabled {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+        
+    }
+     */
+ }

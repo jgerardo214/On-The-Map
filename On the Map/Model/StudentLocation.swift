@@ -22,6 +22,5 @@ struct StudentLocation: Codable {
     var updatedAt : String?
     
     
-    
 }
 
