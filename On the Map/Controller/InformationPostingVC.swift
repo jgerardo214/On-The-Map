@@ -13,11 +13,15 @@ class InformationPostingVC: UIViewController {
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var linkField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
+
     
     
     
     
+    @IBAction func findLocationPressed(_ sender: Any) {
+        
+    }
     
     
 }

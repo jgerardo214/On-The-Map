@@ -30,10 +30,10 @@
             </objects>
             <point key="canvasLocation" x="1180" y="44"/>
         </scene>
-        <!--Maps TableVC-->
+        <!--On The Map-->
         <scene sceneID="Yxt-Lw-Vrb">
             <objects>
-                <tableViewController id="LI3-PC-5Wa" customClass="MapsTableVC" sceneMemberID="viewController">
+                <tableViewController id="LI3-PC-5Wa" customClass="TableView" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vQg-hf-ldi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,6 +77,11 @@
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Be5-VN-cOW" secondAttribute="trailing" constant="20" symbolic="YES" id="v5x-in-wOe"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="iconPin" destination="zn5-XL-4qV" id="Y40-gP-ZSS"/>
+                                    <outlet property="mediaURL" destination="sax-de-rEd" id="6Hx-3S-phb"/>
+                                    <outlet property="studentName" destination="Be5-VN-cOW" id="Gsw-xj-pna"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -87,20 +92,25 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" image="icon_listview-deselected" id="dTd-CK-6xm"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="tIn-ug-EaS">
+                    <navigationItem key="navigationItem" title="On The Map" id="tIn-ug-EaS">
                         <barButtonItem key="leftBarButtonItem" title="LOGOUT" id="cou-QL-RGS">
                             <connections>
-                                <action selector="logoutButtonPressed:" destination="LI3-PC-5Wa" id="sXm-RG-YuK"/>
+                                <action selector="logoutButtonPressed:" destination="LI3-PC-5Wa" id="Vy3-wA-QyL"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="AddPin" image="icon_addpin" id="BQP-Oc-kEa"/>
-                            <barButtonItem title="Refresh" image="icon_refresh" id="eor-0m-SJn"/>
+                            <barButtonItem title="Refresh" image="icon_refresh" id="eor-0m-SJn">
+                                <connections>
+                                    <action selector="refreshButtonPRessed:" destination="LI3-PC-5Wa" id="iQC-vQ-vvy"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="z1V-SJ-9fj" kind="show" identifier="addLocation" id="z6s-pI-Ial"/>
+                        <outlet property="refreshButton" destination="eor-0m-SJn" id="FqA-gc-O17"/>
+                        <segue destination="z1V-SJ-9fj" kind="show" identifier="Information PostingVC" id="z6s-pI-Ial"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9YL-we-TCT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -274,7 +284,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="oGk-Fm-3Vc" id="UbG-Nf-28B"/>
-                        <segue destination="z1V-SJ-9fj" kind="show" identifier="addLocation" id="Kxb-yp-Ipu"/>
+                        <outlet property="refreshButton" destination="JOx-cz-iZz" id="byi-nB-cl3"/>
+                        <segue destination="z1V-SJ-9fj" kind="show" identifier="Infomation PostingVC" id="Kxb-yp-Ipu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZnR-HG-09e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -308,6 +319,9 @@
                                 <state key="normal" title="FIND LOCATION">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="findLocationPressed:" destination="z1V-SJ-9fj" eventType="touchUpInside" id="6s4-WN-D3q"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2up-am-yFH"/>
@@ -333,7 +347,7 @@
                         <outlet property="findLocationButton" destination="NyX-nL-IO4" id="Ph8-ez-TnG"/>
                         <outlet property="linkField" destination="McM-DP-EGr" id="eTS-We-JJ1"/>
                         <outlet property="locationField" destination="a1A-gt-ZFz" id="8CH-Bp-HaO"/>
-                        <segue destination="4P5-bb-TSp" kind="show" identifier="finalizeLocation" id="Lng-As-2vi"/>
+                        <segue destination="4P5-bb-TSp" kind="show" identifier="" id="Lng-As-2vi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhJ-bK-RWn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -352,9 +366,9 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="44"/>
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f3a-MH-cBf">
-                                <rect key="frame" x="0.0" y="100" width="414" height="763"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="807"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="741" id="j0d-jh-ktc"/>
+                                    <constraint firstAttribute="height" constant="807" id="j0d-jh-ktc"/>
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MA7-7v-zkk">
@@ -374,25 +388,25 @@
                             <constraint firstItem="NYa-YA-Ijz" firstAttribute="trailing" secondItem="MA7-7v-zkk" secondAttribute="trailing" constant="75" id="DMP-wC-dTa"/>
                             <constraint firstItem="MA7-7v-zkk" firstAttribute="leading" secondItem="NYa-YA-Ijz" secondAttribute="leading" constant="75" id="Duv-wq-07y"/>
                             <constraint firstItem="QrQ-zc-kj7" firstAttribute="leading" secondItem="NYa-YA-Ijz" secondAttribute="leading" id="DyX-S2-ZzM"/>
-                            <constraint firstItem="f3a-MH-cBf" firstAttribute="top" secondItem="QrQ-zc-kj7" secondAttribute="bottom" id="P9D-kd-Ucx"/>
+                            <constraint firstItem="f3a-MH-cBf" firstAttribute="top" secondItem="QrQ-zc-kj7" secondAttribute="bottom" constant="-44" id="P9D-kd-Ucx"/>
                             <constraint firstItem="f3a-MH-cBf" firstAttribute="leading" secondItem="NYa-YA-Ijz" secondAttribute="leading" id="Vno-Iw-zp2"/>
                             <constraint firstItem="f3a-MH-cBf" firstAttribute="trailing" secondItem="NYa-YA-Ijz" secondAttribute="trailing" id="ary-AU-MWb"/>
                             <constraint firstItem="NYa-YA-Ijz" firstAttribute="bottom" secondItem="MA7-7v-zkk" secondAttribute="bottom" constant="114" id="cYS-0V-S5F"/>
                             <constraint firstItem="QrQ-zc-kj7" firstAttribute="top" secondItem="NYa-YA-Ijz" secondAttribute="top" id="djv-Qf-nR4"/>
                             <constraint firstItem="MA7-7v-zkk" firstAttribute="top" secondItem="QrQ-zc-kj7" secondAttribute="bottom" constant="630" id="fFI-bG-mOW"/>
-                            <constraint firstItem="f3a-MH-cBf" firstAttribute="top" secondItem="QrQ-zc-kj7" secondAttribute="bottom" id="kiH-VR-Z2v"/>
+                            <constraint firstItem="f3a-MH-cBf" firstAttribute="top" secondItem="QrQ-zc-kj7" secondAttribute="bottom" constant="-44" id="kiH-VR-Z2v"/>
                             <constraint firstItem="QrQ-zc-kj7" firstAttribute="trailing" secondItem="NYa-YA-Ijz" secondAttribute="trailing" id="nEN-lH-xe5"/>
                             <constraint firstItem="NYa-YA-Ijz" firstAttribute="bottom" secondItem="f3a-MH-cBf" secondAttribute="bottom" constant="11" id="w6t-wd-zbe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pIL-Kk-Y7t"/>
                     <connections>
-                        <outlet property="FinalizedMap" destination="f3a-MH-cBf" id="4Xk-LV-Dtc"/>
+                        <outlet property="mapView" destination="f3a-MH-cBf" id="Mdp-1L-DLy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ou2-M6-VWS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6307" y="495"/>
+            <point key="canvasLocation" x="6305.7971014492759" y="494.86607142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kCM-9t-BVg">
@@ -413,7 +427,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="z6s-pI-Ial"/>
+        <segue reference="Kxb-yp-Ipu"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>
