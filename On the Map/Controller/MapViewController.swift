@@ -27,7 +27,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func addLocationPressed(_ sender: Any) {
         
-        let informationPostingVC = storyboard?.instantiateViewController(withIdentifier: "Infomation PostingVC") as! InformationPostingVC
+        let informationPostingVC = storyboard?.instantiateViewController(withIdentifier: "InformationPostingVC") as! InformationPostingVC
         present(informationPostingVC, animated: true, completion: nil)
         
         
