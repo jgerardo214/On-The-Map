@@ -185,7 +185,6 @@ class UdacityAPI {
         taskForDELETERequest(url: Endpoints.logout.url, response: LogoutResponse.self) { (response, error) in
             completion(response, error)
         }
-        
     }
     
     class func postingStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {

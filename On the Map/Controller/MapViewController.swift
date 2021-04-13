@@ -34,8 +34,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
-        refreshButton.isEnabled = false
-        UdacityAPI.logout(completion: handleLogoutResponse(success:error:))
+        UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
         
     }
     
@@ -72,7 +71,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             let pinnedLocations = MKPointAnnotation()
             pinnedLocations.coordinate = coordinate
-            pinnedLocations.title = "\(firstName) \(lastName)"
+            pinnedLocations.title = "\(String(describing: firstName)) \(String(describing: lastName))"
             pinnedLocations.subtitle = mediaURL
             
             pinnedLocation.append(contentsOf: pinnedLocation)

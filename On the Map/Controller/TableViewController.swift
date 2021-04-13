@@ -32,16 +32,16 @@ class TableView: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //Dequeue a cell and populate it with text from the correct prompt.
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentLocationCell") as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell") as! TableViewCell
         cell.studentName?.text = appDelegate.studentLocations[(indexPath as NSIndexPath).row].firstName! + " " + appDelegate.studentLocations[(indexPath as NSIndexPath).row].lastName!
         cell.mediaURL?.text = appDelegate.studentLocations[(indexPath as NSIndexPath).row].mediaURL
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCell = tableView.cellForRow(at: indexPath) as! TableViewCell
+        let tableCell = tableView.cellForRow(at: indexPath) as! TableViewCell
         let app = UIApplication.shared
-        if let toOpen = currentCell.mediaURL?.text! {
+        if let toOpen = tableCell.mediaURL?.text! {
             app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
         }
     }
@@ -55,12 +55,16 @@ class TableView: UITableViewController {
         UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
     }
     
+    @IBAction func addLocation(_ sender: Any) {
+        let informationPostingVC = storyboard?.instantiateViewController(withIdentifier: "InformationPostingVC") as! InformationPostingVC
+        present(informationPostingVC, animated: true, completion: nil)
+    }
     
     func handleLogoutResponse(success: Bool, error: Error?) {
         if success {
             self.dismiss(animated: true, completion: nil)
         } else {
-            showFailure(title: "Logout Failed", message: "It was not possible to do logout!")
+            showFailure(title: "Logout Failed", message: "An Error has occured. Try again.")
         }
     }
     
@@ -71,7 +75,7 @@ class TableView: UITableViewController {
             appDelegate.studentLocations = locations
             self.tableView.reloadData()
         } else {
-            showFailure(title: "Get Student Locations Failed", message: error?.localizedDescription ?? "")
+            showFailure(title: "No location found", message: error?.localizedDescription ?? "")
         }
     }
     

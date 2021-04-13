@@ -99,7 +99,11 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="AddPin" image="icon_addpin" id="BQP-Oc-kEa"/>
+                            <barButtonItem title="AddPin" image="icon_addpin" id="BQP-Oc-kEa">
+                                <connections>
+                                    <action selector="addLocation:" destination="LI3-PC-5Wa" id="0Kg-Oj-Smm"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Refresh" image="icon_refresh" id="eor-0m-SJn">
                                 <connections>
                                     <action selector="refreshButtonPRessed:" destination="LI3-PC-5Wa" id="iQC-vQ-vvy"/>
@@ -110,7 +114,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="refreshButton" destination="eor-0m-SJn" id="FqA-gc-O17"/>
-                        <segue destination="z1V-SJ-9fj" kind="presentation" identifier="InformationPostingVC" id="q0a-QU-exF"/>
+                        <segue destination="HX3-Jz-JoD" kind="presentation" identifier="NavController" id="0dd-Ns-UGM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9YL-we-TCT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -285,12 +289,28 @@
                     <connections>
                         <outlet property="mapView" destination="oGk-Fm-3Vc" id="UbG-Nf-28B"/>
                         <outlet property="refreshButton" destination="JOx-cz-iZz" id="byi-nB-cl3"/>
-                        <segue destination="z1V-SJ-9fj" kind="presentation" identifier="InformationPostingVC" id="FRX-Lp-akK"/>
+                        <segue destination="HX3-Jz-JoD" kind="presentation" identifier="NavController" id="IC1-RF-xSB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZnR-HG-09e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2476.811594202899" y="1045.9821428571429"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="D1Y-lv-uDb">
+            <objects>
+                <navigationController id="HX3-Jz-JoD" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="adQ-KL-hkf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="z1V-SJ-9fj" kind="relationship" relationship="rootViewController" id="ar1-yy-mEB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g1Y-fz-Xqo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3909" y="495"/>
         </scene>
         <!--InformationPostingVC-->
         <scene sceneID="Pmy-B4-5OR">
@@ -301,7 +321,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="Ime-ZC-ZPl">
-                                <rect key="frame" x="123" y="92" width="168" height="86"/>
+                                <rect key="frame" x="123" y="148" width="168" height="30"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a1A-gt-ZFz">
                                 <rect key="frame" x="41" y="300" width="323" height="34"/>
@@ -342,12 +362,17 @@
                             <constraint firstItem="2up-am-yFH" firstAttribute="bottom" secondItem="Ime-ZC-ZPl" secondAttribute="bottom" constant="630" id="yWa-r0-0FI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jMw-Sa-KGz"/>
+                    <navigationItem key="navigationItem" title="Add Location" id="jMw-Sa-KGz">
+                        <barButtonItem key="leftBarButtonItem" title="CANCEL" id="H9K-TP-NUr">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="z1V-SJ-9fj" id="ZM0-n5-nzo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="findLocationButton" destination="NyX-nL-IO4" id="Ph8-ez-TnG"/>
                         <outlet property="linkField" destination="McM-DP-EGr" id="eTS-We-JJ1"/>
                         <outlet property="locationField" destination="a1A-gt-ZFz" id="8CH-Bp-HaO"/>
-                        <segue destination="4P5-bb-TSp" kind="presentation" id="bJX-XL-Qeo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhJ-bK-RWn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -359,20 +384,20 @@
             <objects>
                 <viewController storyboardIdentifier="LocationFinalizedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4P5-bb-TSp" userLabel="LocationFinalizedVC" customClass="LocationFinalizedVC" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S04-BQ-MAI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="QrQ-zc-kj7">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f3a-MH-cBf">
-                                <rect key="frame" x="0.0" y="-10" width="414" height="807"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="807"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="807" id="j0d-jh-ktc"/>
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MA7-7v-zkk">
-                                <rect key="frame" x="75" y="664" width="264" height="30"/>
+                                <rect key="frame" x="75" y="718" width="264" height="30"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
                                 <state key="normal" title="Finish">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -427,7 +452,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="FRX-Lp-akK"/>
+        <segue reference="0dd-Ns-UGM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>
