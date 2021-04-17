@@ -14,39 +14,50 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var linkField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     
     private var presentingController: UIViewController?
     var geocoder = CLGeocoder()
     var latitude: Float = 0.0
     var longitude: Float = 0.0
-    
+    var keyboardIsVisible = false
+    var mediaUrl: String = ""
+    var pinnedLocation: String!
     
     override func viewDidLoad() {
         locationField.delegate = self
         linkField.delegate = self
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        presentingController = presentingViewController
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.tabBarController?.tabBar.isHidden = true
+        subscribeToKeyboardNotifications()
         
-       
+        
     }
     
+    
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func findLocationPressed(_ sender: Any) {
-        if locationField.text!.isEmpty || linkField.text!.isEmpty {
-            showFailure(title: "No information found!", message: "Please fill the missing location, link or information associated.")
+        
+        if locationField.text!.isEmpty {
+            let alert = UIAlertController(title: "No Location", message: "No Location was entered", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         } else {
-            geocoder.geocodeAddressString(locationField.text ?? "") { (placemarks, error) in
-                self.processResponse(withPlacemarks: placemarks, error: error)
-            }
+            let submitVC = storyboard?.instantiateViewController(identifier: "LocationFinalizedVC") as! LocationFinalizedVC
+            submitVC.locationRetrieved = locationField.text
+            self.present(submitVC, animated: true, completion: nil)
         }
         
+
         
         
     }
@@ -85,6 +96,50 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: Keyboard Functions
+    @objc func keyboardWillShow(_ notification:Notification) {
+        if !keyboardIsVisible {
+            if locationField.isEditing {
+                view.frame.origin.y -= getKeyboardHeight(notification) - 50 - linkField.frame.height - findLocationButton.frame.height
+            } else if linkField.isEditing {
+                view.frame.origin.y -= getKeyboardHeight(notification) - 50 - findLocationButton.frame.height
+            }
+            keyboardIsVisible = true
+        }
+    }
+    
+    // Function called when screen must be moved down
+    @objc func keyboardWillHide(_ notification:Notification) {
+        if keyboardIsVisible {
+            view.frame.origin.y = 0
+            keyboardIsVisible = false
+        }
+    }
+    
+    // Get keyboard size for move the screen
+    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        return keyboardSize.cgRectValue.height
+    }
+    
+    
+    
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
     }
     
 }

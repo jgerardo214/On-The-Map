@@ -108,7 +108,7 @@ class UdacityAPI {
                         }
                     } catch {
                         DispatchQueue.main.async {
-                            completion(nil, ErrorMessage(message: "It was not possible to save the information. Try again."))
+                            completion(nil, ErrorMessage(message: "Unable to save. Try again."))
                         }
                     }
                 }

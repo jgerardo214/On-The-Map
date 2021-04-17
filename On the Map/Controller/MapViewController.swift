@@ -90,12 +90,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func mappedLocations(_ locations: [StudentLocation]) {
-        
-        
-        
-        
-    }
+   
     
     func handleStudentLocationsResponse(locations: [StudentLocation], error: Error?) {
         refreshButton.isEnabled = true
@@ -118,11 +113,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             showFailure(title: "Logout Failed", message: error?.localizedDescription ?? "")
         }
     }
+    
     func showFailure(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+    
+    
 
     
 }

@@ -13,11 +13,15 @@ class LocationFinalizedVC: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var navbar: UINavigationItem!
     
     var latitude: Float = 0.0
     var longitude: Float = 0.0
     var mapString: String = ""
     var mediaURL: String = ""
+    
+    var locationRetrieved: String!
+    var urlRetrieved: String!
     
     override func viewDidLoad() {
         

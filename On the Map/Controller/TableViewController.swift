@@ -31,7 +31,7 @@ class TableView: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //Dequeue a cell and populate it with text from the correct prompt.
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell") as! TableViewCell
         cell.studentName?.text = appDelegate.studentLocations[(indexPath as NSIndexPath).row].firstName! + " " + appDelegate.studentLocations[(indexPath as NSIndexPath).row].lastName!
         cell.mediaURL?.text = appDelegate.studentLocations[(indexPath as NSIndexPath).row].mediaURL
