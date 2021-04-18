@@ -33,7 +33,7 @@ class UdacityAPI {
             switch self {
             
             case .login:
-                return Endpoints.base + "session"
+                return Endpoints.base + "/session"
             case .getStudentLocation:
                 return Endpoints.base + "/StudentLocation?limit=100&order=-updatedAt"
             case .postStudentLocation:
@@ -52,7 +52,7 @@ class UdacityAPI {
     }
     
     
-    class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionTask {
+    class func taskForGETRequest<ResponseType: Decodable>(url: URL, removeFirstCharacters: Bool, response: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionTask{
            
            let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, response, error in
                guard let data = data else {
@@ -90,6 +90,7 @@ class UdacityAPI {
                request.addValue("application/json", forHTTPHeaderField: "Accept")
                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
                request.httpBody = try! JSONEncoder().encode(body)
+        
                let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                    guard let data = data else {
                        DispatchQueue.main.async {
@@ -100,7 +101,8 @@ class UdacityAPI {
                    var newData = data
                    if removeFirstCharacters {
                        let range = 5..<data.count
-                       newData = newData.subdata(in: range) /* subset response data! */
+                       newData = newData.subdata(in: range)
+                    print(String(data: newData, encoding: .utf8)!)
                    }
                    let decoder = JSONDecoder()
                    do {
@@ -136,42 +138,42 @@ class UdacityAPI {
        class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> ()) {
            
         var request = URLRequest(url: Endpoints.login.url)
-                 request.httpMethod = "POST"
-                 request.addValue("application/json", forHTTPHeaderField: "Accept")
-                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                 request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: .utf8)
-                 
-                 let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
-                     
-                     func showError(_ error: String){
-                         print(error)
-                     }
-                     //guard (error == nil) else {
-                         //completion (false, error)
-                         //return
-                     //}
-                     
-                     guard let data = data else {
-                         showError("there is no data")
-                         return
-                     }
-                     
-                     if error != nil { // Handle error…
-                         return
-                     }
-                     let range = (5..<data.count)
-                     let newData = data.subdata(in: range)
-                     print(String(data: newData, encoding: .utf8)!)
-                     completion(true, nil)
-                 }
-                 task.resume()
+                         request.httpMethod = "POST"
+                         request.addValue("application/json", forHTTPHeaderField: "Accept")
+                         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                         request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: .utf8)
+                         
+                         let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
+                             
+                             func showError(_ error: String){
+                                 print(error)
+                             }
+                             guard (error == nil) else {
+                                 completion (false, error)
+                                 return
+                             }
+                             
+                             guard let data = data else {
+                                 showError("there is no data")
+                                 return
+                             }
+                             
+                             if error != nil { // Handle error…
+                                 return
+                             }
+                             let range = (5..<data.count)
+                             let newData = data.subdata(in: range)
+                             print(String(data: newData, encoding: .utf8)!)
+                             completion(true, nil)
+                         }
+                         task.resume()
        
     }
             
        
        class func getStudentLocation(completion: @escaping ([StudentLocation], Error?) -> Void) {
            
-        taskForGETRequest(url: Endpoints.getStudentLocation.url, responseType: StudentLocationResults.self) { (response, error) in
+        taskForGETRequest(url: Endpoints.getStudentLocation.url, removeFirstCharacters: false, response: StudentLocationResults.self) { (response, error) in
                    if let response = response {
                        completion(response.results, nil)
                    } else {
@@ -206,7 +208,7 @@ class UdacityAPI {
        
        class func getUserData(completion: @escaping (String?, String?, Error?) -> Void) {
           
-           taskForGETRequest(url: Endpoints.getUserData.url, responseType: UserResponse.self) { (response, error) in
+        taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: false, response: UserResponse.self) { (response, error) in
                if let response = response {
                    completion(response.firstName, response.lastName, nil)
                } else {
