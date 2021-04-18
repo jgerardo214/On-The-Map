@@ -26,6 +26,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     var locationRetrieved: String!
     var urlRetrieved: String!
     
+    
     override func viewDidLoad() {
         mapView.delegate = self
         searchLocation()
@@ -117,7 +118,8 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     func handlePublicUserData(firstName: String?, lastName: String?, error: Error?) {
         if error == nil {
-            UdacityAPI.postStudentLocation(firstName: firstName!, lastName: lastName!, mapString: self.mapString, mediaURL: self.mediaURL, latitude: self.latitude, longitude: self.longitude, completion: handlePostStudentResponse(success:error:))
+            UdacityAPI.postingStudentLocation(firstName: firstName!, lastName: lastName!, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+            
         } else {
             showFailure(title: "There was an error!", message: error?.localizedDescription ?? "")
         }
