@@ -7,13 +7,6 @@
 
 import Foundation
 
-struct LoginRequest: Codable {
-    
-    let email: String
-    let password: String
-    
-}
-
 struct LoginResponse: Codable {
     let account: Account
     let session: Session
@@ -28,3 +21,12 @@ struct Session: Codable {
     let id: String?
     let expiraton: String?
 }
+
+/*struct LoginRequest: Codable {
+    
+    let email: String
+    let password: String
+    
+} */
+
+

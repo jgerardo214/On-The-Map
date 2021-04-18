@@ -127,7 +127,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         if success {
             self.navigationController?.dismiss(animated: true, completion: nil)
         } else {
-            showFailure(title: "Not Possible to Save Information", message: error?.localizedDescription ?? "")
+            showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
         }
     }
     
@@ -136,6 +136,8 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+    
+    // TODO: have the pin show student information and if pin is tapped open link to Safari
     
 
     

@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
+    var keyboardIsVisible = false
     
     
     
@@ -34,19 +34,31 @@ class LoginViewController: UIViewController {
         self.activityIndicator.isHidden = true
         self.activityIndicator.hidesWhenStopped = true
         
-        
+      
         
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        subscribeToKeyboardNotifications()
+    }
+    
+    // TODO: If credentials are invalid send an alert indicating the failure
     
     @IBAction func loginButtonPressed(_ sender: Any) {
+        
+        
+        
         fieldsChecker()
         setLoggingIn(true)
-        
-        setLoggingIn(true)
-                UdacityAPI.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
+        UdacityAPI.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
+
                 
         
         
@@ -54,6 +66,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signupButtonPressed(_ sender: Any) {
+        
+
         
         UIApplication.shared.open(URL(string: "https://auth.udacity.com/sign-up")!, options: [:], completionHandler: nil)
         
@@ -65,6 +79,8 @@ class LoginViewController: UIViewController {
     
     func handleLoginResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
+        
+        
         
         if success {
             DispatchQueue.main.async {
@@ -83,6 +99,9 @@ class LoginViewController: UIViewController {
             } else {
                 self.activityIndicator.stopAnimating()
             }
+            self.emailTextField.isEnabled = !loggingIn
+            self.passwordTextField.isEnabled = !loggingIn
+            self.loginButton.isEnabled = !loggingIn
         }
         
          
@@ -104,10 +123,44 @@ class LoginViewController: UIViewController {
                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                self.present(alert, animated: true, completion: nil)
            }
+        
+
        } else {
            setLoggingIn(true)
        }
    }
+    
+    // Function called when keyboard must be shown and the screen must be moved up
+    @objc func keyboardWillShow(_ notification:Notification) {
+        if !keyboardIsVisible && (emailTextField.isEditing || passwordTextField.isEditing) {
+            view.frame.origin.y -= loginButton.frame.height
+            keyboardIsVisible = true
+        }
+    }
+    
+    // Function called when screen must be moved down
+    @objc func keyboardWillHide(_ notification:Notification) {
+        if keyboardIsVisible {
+            view.frame.origin.y += loginButton.frame.height
+            keyboardIsVisible = false
+        }
+    }
+    
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Text field delegate functions
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
     
 }
 

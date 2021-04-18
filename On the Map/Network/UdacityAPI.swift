@@ -14,10 +14,10 @@ class UdacityAPI {
     
    
     enum Endpoints {
-        static let base = "https://onthemap-api.udacity.com/v1/"
+        static let base = "https://onthemap-api.udacity.com/v1"
         
         struct Auth {
-            static var keyAccount = ""
+            static var accountKey = ""
             static var sessionId = ""
         }
         
@@ -33,7 +33,7 @@ class UdacityAPI {
             case .login: return Endpoints.base + "session"
             case .getStudentLocation:  return Endpoints.base + "/StudentLocation?limit=100&order=-updatedAt"
             case .postStudentLocation: return Endpoints.base + "/StudentLocation"
-            case .getUserData: return Endpoints.base + "users/" + Auth.keyAccount
+            case .getUserData: return Endpoints.base + "/users/\(Auth.accountKey)"
             case .logout: return Endpoints.base + "session"
             }
             
@@ -125,7 +125,8 @@ class UdacityAPI {
     // MARK: Networking functions
     
     class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> ()) {
-         
+        
+        
          var request = URLRequest(url: Endpoints.login.url)
          request.httpMethod = "POST"
          request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -156,13 +157,14 @@ class UdacityAPI {
              completion(true, nil)
          }
          task.resume()
+       
          
          
      }
     
     class func getStudentLocation(completion: @escaping ([StudentLocation], Error?) -> Void) {
         
-        taskForGETRequest(url: Endpoints.getStudentLocation.url, responseType: StudentLocationResults.self) { (response, _) in
+        taskForGETRequest(url: Endpoints.getStudentLocation.url, responseType: StudentLocationResults.self) { (response, error) in
             if let response = response {
                 completion(response.results, nil)
             } else {
@@ -174,7 +176,7 @@ class UdacityAPI {
     }
     
     class func postStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {
-        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(accountKey: Endpoints.Auth.keyAccount, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
+        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(accountKey: Endpoints.Auth.accountKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
             completion(error == nil, error)
         }
         
@@ -189,7 +191,7 @@ class UdacityAPI {
     
     class func postingStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {
         
-        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(accountKey: Endpoints.Auth.keyAccount, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
+        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(accountKey: Endpoints.Auth.accountKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
             completion(error == nil, error)
         }
         
@@ -204,7 +206,6 @@ class UdacityAPI {
             } else {
                 completion(nil, nil, error)
             }
-        }
-    }
+        }    }
     
 }

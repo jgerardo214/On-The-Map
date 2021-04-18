@@ -95,7 +95,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
    
     
     func handleStudentLocationsResponse(locations: [StudentLocation], error: Error?) {
-        refreshButton.isEnabled = true
+        
         
         if error == nil {
             if self.mapView.annotations.count > 0 {
