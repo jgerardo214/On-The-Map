@@ -9,17 +9,16 @@ import Foundation
 
 struct StudentLocation: Codable {
     
-    static var lastFeched: [StudentLocation]?
-    var createdAt: String?
-    var firstName : String?
-    var lastName : String?
-    var latitude : Double?
-    var longitude : Double?
-    var mapString : String?
-    var mediaURL : String?
-    var objectId : String?
-    var uniqueKey : String?
-    var updatedAt : String?
+    let objectId: String
+    let uniqueKey: String
+    let firstName: String
+    let lastName: String
+    let mapString: String
+    let mediaURL: String
+    let latitude: Float
+    let longitude: Float
+    let createdAt: String
+    let updatedAt: String
     
     
 }

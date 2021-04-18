@@ -36,13 +36,18 @@ class LoginViewController: UIViewController {
         
         
         
+        
     }
     
     
     
     @IBAction func loginButtonPressed(_ sender: Any) {
+        fieldsChecker()
         setLoggingIn(true)
-        UdacityAPI.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
+        
+        setLoggingIn(true)
+                UdacityAPI.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
+                
         
         
         
@@ -60,6 +65,7 @@ class LoginViewController: UIViewController {
     
     func handleLoginResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
+        
         if success {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "loginSuccessful", sender: nil)
@@ -78,6 +84,8 @@ class LoginViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
             }
         }
+        
+         
       
         
        
@@ -88,6 +96,18 @@ class LoginViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+    
+    func fieldsChecker() {
+       if (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)!  {
+           DispatchQueue.main.async {
+               let alert = UIAlertController(title: "Credentials were not filled in", message: "Please fill both email and password", preferredStyle: .alert)
+               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+               self.present(alert, animated: true, completion: nil)
+           }
+       } else {
+           setLoggingIn(true)
+       }
+   }
     
 }
 

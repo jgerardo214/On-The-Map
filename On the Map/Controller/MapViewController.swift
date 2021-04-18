@@ -23,6 +23,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
        
     }
     
+   
+    
     
     
     @IBAction func addLocationPressed(_ sender: Any) {
@@ -61,8 +63,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         var pinnedLocation = [MKPointAnnotation]()
                
         for location in locations {
-            let latitude = CLLocationDegrees(location.latitude!)
-            let longitude = CLLocationDegrees(location.longitude!)
+            let latitude = CLLocationDegrees(location.latitude)
+            let longitude = CLLocationDegrees(location.longitude)
             let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             
             let firstName = location.firstName
@@ -122,6 +124,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     
 
+    @IBAction func logoutButtonPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 }
 

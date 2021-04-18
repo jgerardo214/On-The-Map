@@ -33,7 +33,7 @@ class TableView: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell") as! TableViewCell
-        cell.studentName?.text = appDelegate.studentLocations[(indexPath as NSIndexPath).row].firstName! + " " + appDelegate.studentLocations[(indexPath as NSIndexPath).row].lastName!
+        cell.studentName?.text = appDelegate.studentLocations[(indexPath as NSIndexPath).row].firstName + " " + appDelegate.studentLocations[(indexPath as NSIndexPath).row].lastName
         cell.mediaURL?.text = appDelegate.studentLocations[(indexPath as NSIndexPath).row].mediaURL
         return cell
     }
@@ -47,7 +47,7 @@ class TableView: UITableViewController {
     }
    
     @IBAction func logoutButtonPressed(_ sender: Any) {
-        UdacityAPI.logout(completion: handleLogoutResponse(success:error:))
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -69,7 +69,7 @@ class TableView: UITableViewController {
     }
     
     func handleStudentLocationsResponse(locations: [StudentLocation], error: Error?) {
-        //refreshButton.isEnabled = true
+        refreshButton.isEnabled = true
         
         if error == nil {
             appDelegate.studentLocations = locations

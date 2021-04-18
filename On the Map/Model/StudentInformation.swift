@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct ResultsResponse: Codable {
+    let results : [PostLocationResponse]
+
+}
+
 struct StudentInformation: Codable {
     
     let createdAt: String?
@@ -20,9 +25,6 @@ struct StudentInformation: Codable {
     let locationId: String
     let uniqueKey: String?
     let updatedAt: String?
-    
-    
-    
     
     
     

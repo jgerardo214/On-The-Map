@@ -33,11 +33,13 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
         subscribeToKeyboardNotifications()
         
         
     }
+    
+    
     
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -61,35 +63,7 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
         
         
     }
-    
-    func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
-        if error != nil {
-            showFailure(title: "Location Does Not Exist", message: "The informed location doesn't exist.")
-        } else {
-            if let placemarks = placemarks, placemarks.count > 0 {
-                let location = (placemarks.first?.location)! as CLLocation
-                
-                let coordinate = location.coordinate
-                self.latitude = Float(coordinate.latitude)
-                self.longitude = Float(coordinate.longitude)
-                
-                confirmLocation()
-                
-            } else {
-                showFailure(title: "Location Not Found!", message: "Try to specify full name of state and city.")
-            }
-        }
-    }
-    
-    func confirmLocation() {
-        let informationConfirmingViewController = self.storyboard!.instantiateViewController(withIdentifier: "LocationFinalizedVC") as! LocationFinalizedVC
-        informationConfirmingViewController.latitude = self.latitude
-        informationConfirmingViewController.longitude = self.longitude
-        informationConfirmingViewController.mapString = self.locationField.text!
-        informationConfirmingViewController.mediaURL = self.linkField.text!
-        informationConfirmingViewController.navigationItem.title = "LocationFinalizedVC"
-        self.navigationController?.pushViewController(informationConfirmingViewController, animated: true)
-    }
+ 
     
     
     func showFailure(title: String, message: String) {
