@@ -39,7 +39,7 @@ class UdacityAPI {
             case .postStudentLocation:
                 return Endpoints.base + "/StudentLocation"
             case .getUserData:
-                return Endpoints.base + "/users" + Auth.accountKey
+                return Endpoints.base + "/users" + "/\(Auth.accountKey)"
             case .logout:
                 return Endpoints.base + "session"
             }
@@ -102,7 +102,7 @@ class UdacityAPI {
                    if removeFirstCharacters {
                        let range = 5..<data.count
                        newData = newData.subdata(in: range)
-                    print(String(data: newData, encoding: .utf8)!)
+                    //print(String(data: newData, encoding: .utf8)!)
                    }
                    let decoder = JSONDecoder()
                    do {
@@ -173,7 +173,7 @@ class UdacityAPI {
        
        class func getStudentLocation(completion: @escaping ([StudentLocation], Error?) -> Void) {
            
-        taskForGETRequest(url: Endpoints.getStudentLocation.url, removeFirstCharacters: false, response: StudentLocationResults.self) { (response, error) in
+        let _ = taskForGETRequest(url: Endpoints.getStudentLocation.url, removeFirstCharacters: false, response: StudentLocationResults.self) { (response, error) in
                    if let response = response {
                        completion(response.results, nil)
                    } else {
@@ -193,7 +193,7 @@ class UdacityAPI {
         }
        
        class func logout(completion: @escaping (Bool, Error?) -> Void) {
-           taskForDELETERequest(url: Endpoints.logout.url, response: LogoutResponse.self) { (response, error) in
+           let _ = taskForDELETERequest(url: Endpoints.logout.url, response: LogoutResponse.self) { (response, error) in
                completion(response, error)
            }
        }
@@ -206,18 +206,16 @@ class UdacityAPI {
            
        }
        
-       class func getUserData(completion: @escaping (String?, String?, Error?) -> Void) {
-          
-        taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: false, response: UserResponse.self) { (response, error) in
-               if let response = response {
-                   completion(response.firstName, response.lastName, nil)
-               } else {
-                   completion(nil, nil, error)
-               }
-           }
-        
-       }
-       
-   }
+    class func getPublicUserData(completion: @escaping (String?, String?, Error?) -> Void) {
+        taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: true, response: UserResponse.self) { (response, error) in
+            if let response = response {
+                completion(response.firstName, response.lastName, nil)
+            } else {
+                completion(nil, nil, error)
+            }
+        }
+    }
+    
+}
 
 

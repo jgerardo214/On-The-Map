@@ -77,7 +77,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     
     @IBAction func finishButtonPressed(_ sender: Any) {
-        UdacityAPI.getUserData(completion: handlePublicUserData(firstName:lastName:error:))
+        UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
         
             }
     
