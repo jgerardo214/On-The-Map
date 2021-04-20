@@ -7,7 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D9491751-BA33-43DD-97EA-1E6682C3EA5F"
+            uuid = "445EC707-BDCA-42B3-9635-25C161B0BE3F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -20,7 +20,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D9491751-BA33-43DD-97EA-1E6682C3EA5F - 75e6dddd83c039ac"
+                  uuid = "445EC707-BDCA-42B3-9635-25C161B0BE3F - 75e6dddd83c039ac"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -35,7 +35,7 @@
                   offsetFromSymbolStart = "307">
                </Location>
                <Location
-                  uuid = "D9491751-BA33-43DD-97EA-1E6682C3EA5F - 3c82fc349304b71b"
+                  uuid = "445EC707-BDCA-42B3-9635-25C161B0BE3F - 3c82fc349304b71b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"

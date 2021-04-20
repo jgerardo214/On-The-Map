@@ -68,8 +68,8 @@
 		FD54BC97261AD31C00448212 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		FD5A96B92612FAD300DE9AFA /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		FD5A96C62614121300DE9AFA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		FD695CE6262B8FAE008C4132 /* On the MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On the MapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FD695CE7262B8FAE008C4132 /* On the MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On the MapUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD695CE6262B8FAE008C4132 /* On the MapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "On the MapTests.xctest"; path = "/Users/jonathangerardo/Desktop/On the Map_/On-The-Map/build/Debug-iphoneos/On the MapTests.xctest"; sourceTree = "<absolute>"; };
+		FD695CE7262B8FAE008C4132 /* On the MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "On the MapUITests.xctest"; path = "/Users/jonathangerardo/Desktop/On the Map_/On-The-Map/build/Debug-iphoneos/On the MapUITests.xctest"; sourceTree = "<absolute>"; };
 		FD82D042260AEB2800DF1AF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD82D044260AEB2800DF1AF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FD82D049260AEB2800DF1AF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -124,8 +124,6 @@
 			children = (
 				FD82D041260AEB2800DF1AF5 /* On the Map */,
 				FD82D07E260BADBB00DF1AF5 /* On the Map.app */,
-				FD695CE6262B8FAE008C4132 /* On the MapTests.xctest */,
-				FD695CE7262B8FAE008C4132 /* On the MapUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};

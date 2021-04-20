@@ -38,7 +38,7 @@ class UdacityAPI {
             case .postStudentLocation:
                 return Endpoints.base + "/StudentLocation"
             case .getUserData:
-                return Endpoints.base + "/users/" + Auth.accountKey
+                return Endpoints.base + "/users/" + "\(UserData.CodingKeys.key.rawValue)"
             case .logout:
                 return Endpoints.base + "session"
             }
@@ -84,47 +84,45 @@ class UdacityAPI {
            
        }
        
-       class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, removeFirstCharacters: Bool, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
-               var request = URLRequest(url: url)
-               request.httpMethod = "POST"
-               request.addValue("application/json", forHTTPHeaderField: "Accept")
-               request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-               request.httpBody = try! JSONEncoder().encode(body)
-        
-               let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                   guard let data = data else {
-                       DispatchQueue.main.async {
-                           completion(nil, error)
-                       }
-                       return
-                   }
-                   var newData = data
-                   if removeFirstCharacters {
-                       let range = 5..<data.count
-                       newData = newData.subdata(in: range)
-                    //print(String(data: newData, encoding: .utf8)!)
-                   }
-                   let decoder = JSONDecoder()
-                   do {
-                       let responseObject = try decoder.decode(ResponseType.self, from: newData)
-                       DispatchQueue.main.async {
-                           completion(responseObject, nil)
-                       }
-                   } catch {
-                       do {
-                           let errorResponse = try decoder.decode(ErrorResponse.self, from: newData)
-                           DispatchQueue.main.async {
-                               completion(nil, errorResponse)
-                           }
-                       } catch {
-                           DispatchQueue.main.async {
-                               completion(nil, ErrorMessage(message: "Unable to save. Try again."))
-                           }
-                       }
-                   }
-               }
-               task.resume()
-       }
+    class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, removeFirstCharacters: Bool, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try! JSONEncoder().encode(body)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            var newData = data
+            if removeFirstCharacters {
+                let range = 5..<data.count
+                newData = newData.subdata(in: range) /* subset response data! */
+            }
+            let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(ResponseType.self, from: newData)
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
+            } catch {
+                do {
+                    let errorResponse = try decoder.decode(ErrorResponse.self, from: newData)
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse)
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        completion(nil, ErrorMessage(message: "It was not possible to save the information. Try again."))
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
            
            class func taskForDELETERequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (Bool, Error?) -> Void) -> URLSessionTask {
                taskForDELETERequest(url: Endpoints.logout.url, response: LogoutResponse.self) { (response, error) in
@@ -135,7 +133,7 @@ class UdacityAPI {
        // MARK: Networking functions
     
        
-       class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> ()) {
+      class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> ()) {
            
         var request = URLRequest(url: Endpoints.login.url)
                          request.httpMethod = "POST"
@@ -167,6 +165,7 @@ class UdacityAPI {
                              completion(true, nil)
                          }
                          task.resume()
+ 
        
     }
             
