@@ -19,7 +19,6 @@ class UdacityAPI {
         
         struct Auth {
             static var accountKey = ""
-            static var sessionId = ""
         }
         
         
@@ -39,7 +38,7 @@ class UdacityAPI {
             case .postStudentLocation:
                 return Endpoints.base + "/StudentLocation"
             case .getUserData:
-                return Endpoints.base + "/users" + "/\(Auth.accountKey)"
+                return Endpoints.base + "/users/" + Auth.accountKey
             case .logout:
                 return Endpoints.base + "session"
             }
@@ -63,9 +62,10 @@ class UdacityAPI {
                }
                var newData = data
                
-               let range = 5..<data.count
+            let range = 5..<data.count
                newData = newData.subdata(in: range)
-               
+            print(String(data: newData, encoding: .utf8)!)
+            
                let decoder = JSONDecoder()
                do {
                    let responseObject = try decoder.decode(ResponseType.self, from: newData)
@@ -207,7 +207,7 @@ class UdacityAPI {
        }
        
     class func getPublicUserData(completion: @escaping (String?, String?, Error?) -> Void) {
-        taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: true, response: UserResponse.self) { (response, error) in
+        let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: true, response: UserResponse.self) { (response, error) in
             if let response = response {
                 completion(response.firstName, response.lastName, nil)
             } else {
