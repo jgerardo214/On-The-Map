@@ -18,7 +18,7 @@ class UdacityAPI {
         static let base = "https://onthemap-api.udacity.com/v1"
         
         struct Auth {
-            static var accountKey = ""
+            static var accountKey = "\(UserData.CodingKeys.key.rawValue)"
         }
         
         
@@ -38,7 +38,7 @@ class UdacityAPI {
             case .postStudentLocation:
                 return Endpoints.base + "/StudentLocation"
             case .getUserData:
-                return Endpoints.base + "/users/" + "\(UserData.CodingKeys.key.rawValue)"
+                return Endpoints.base + "/users/" + "\(Auth.accountKey)"
             case .logout:
                 return Endpoints.base + "session"
             }
@@ -104,9 +104,9 @@ class UdacityAPI {
             }
             let decoder = JSONDecoder()
             do {
-                let responseObject = try decoder.decode(ResponseType.self, from: newData)
+                let responseObject = try decoder.decode(PostLocationResponse.self, from: newData)
                 DispatchQueue.main.async {
-                    completion(responseObject, nil)
+                    completion((responseObject as! ResponseType), nil)
                 }
             } catch {
                 do {
@@ -116,7 +116,7 @@ class UdacityAPI {
                     }
                 } catch {
                     DispatchQueue.main.async {
-                        completion(nil, ErrorMessage(message: "It was not possible to save the information. Try again."))
+                        completion(nil, ErrorMessage(message: error.localizedDescription ))
                     }
                 }
             }
@@ -129,8 +129,6 @@ class UdacityAPI {
                    completion(response, error)
                }
               }
-       
-       // MARK: Networking functions
     
        
       class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> ()) {
@@ -168,6 +166,8 @@ class UdacityAPI {
  
        
     }
+    
+   
             
        
        class func getStudentLocation(completion: @escaping ([StudentLocation], Error?) -> Void) {
