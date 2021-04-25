@@ -71,6 +71,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let lastName = location.lastName
             let mediaURL = location.mediaURL
             
+            
             let pinnedLocations = MKPointAnnotation()
             pinnedLocations.coordinate = coordinate
             pinnedLocations.title = "\(String(describing: firstName)) \(String(describing: lastName))"

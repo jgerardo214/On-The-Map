@@ -23,10 +23,13 @@ struct Session: Codable {
     let expiraton: String?
 }
 
-struct LoginRequest: Codable {
+
+struct PostLocationResponse: Codable {
     
-    let email: String
-    let password: String
+    let createdAt: String
+    let objectId: String
+    
+    
     
 }
 

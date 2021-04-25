@@ -20,6 +20,8 @@ struct StudentLocation: Codable {
     let createdAt: String
     let updatedAt: String
     
+  
+    
     
 }
 

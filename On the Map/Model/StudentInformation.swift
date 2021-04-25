@@ -26,6 +26,18 @@ struct StudentInformation: Codable {
     let uniqueKey: String?
     let updatedAt: String?
     
-    
+    init( createdAt: String, firstName: String, lastName: String, latitude: Double, longitude: Double, mapString: String, mediaURL: String, objectId: String, locationId: String, uniqueKey: String, updatedAt: String) {
+        self.createdAt = createdAt
+        self.firstName = firstName
+        self.lastName = lastName
+        self.latitude = latitude
+        self.longitude = longitude
+        self.mapString = mapString
+        self.mediaURL = mediaURL
+        self.objectId = objectId
+        self.locationId = locationId
+        self.uniqueKey = uniqueKey
+        self.updatedAt = updatedAt
+    }
     
 }

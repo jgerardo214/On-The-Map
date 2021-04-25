@@ -18,6 +18,8 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     
     private var presentingController : UIViewController?
+    var firstName: String = ""
+    var lastName: String = ""
     var latitude: Float = 0.0
     var longitude: Float = 0.0
     var mapString: String = ""
@@ -77,9 +79,11 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     
     @IBAction func finishButtonPressed(_ sender: Any) {
-        UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
         
-            }
+        UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+    }
+        
+        
     
     func showMapAnnotation() {
         let latitude = CLLocationDegrees(self.latitude)
@@ -118,7 +122,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     func handlePublicUserData(firstName: String?, lastName: String?, error: Error?) {
         if error == nil {
-            UdacityAPI.postingStudentLocation(firstName: firstName!, lastName: lastName!, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+            UdacityAPI.postStudentLocation(firstName: firstName!, lastName: lastName!, mapString: self.mapString, mediaURL: self.mediaURL, latitude: self.latitude, longitude: self.longitude, completion: handlePostStudentResponse(success:error:))
             
         } else {
             showFailure(title: "There was an error!", message: error?.localizedDescription ?? "")
@@ -139,7 +143,8 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
-    // TODO: have the pin show student information and if pin is tapped open link to Safari
+    // MARK TODO: if pin is pressed open the link the student posted
+    
     
 
     
