@@ -7,10 +7,12 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 
 
 class UdacityAPI {
+    
     
     
     
@@ -19,6 +21,8 @@ class UdacityAPI {
         
         struct Auth {
             static var accountKey = ""
+
+            
         }
         
         
@@ -138,35 +142,41 @@ class UdacityAPI {
       class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> ()) {
            
         var request = URLRequest(url: Endpoints.login.url)
-                         request.httpMethod = "POST"
-                         request.addValue("application/json", forHTTPHeaderField: "Accept")
-                         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                         request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: .utf8)
-                         
-                         let task = URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
-                             
-                             func showError(_ error: String){
-                                 print(error)
-                             }
-                             guard (error == nil) else {
-                                 completion (false, error)
-                                 return
-                             }
-                             
-                             guard let data = data else {
-                                 showError("there is no data")
-                                 return
-                             }
-                             
-                             if error != nil { // Handle error…
-                                 return
-                             }
-                             let range = (5..<data.count)
-                             let newData = data.subdata(in: range)
-                             print(String(data: newData, encoding: .utf8)!)
-                             completion(true, nil)
-                         }
-                         task.resume()
+               request.httpMethod = "POST"
+               request.addValue("application/json", forHTTPHeaderField: "Accept")
+               request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+               // encoding a JSON body from a string, can also use a Codable struct
+               request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: .utf8)
+               print(request)
+               let session = URLSession.shared
+               let task = session.dataTask(with: request) { data, response, error in
+                   if error != nil { // Handle error…
+                       print(error?.localizedDescription ?? "")
+                       return
+                   }
+                   
+                   guard let data = data else {
+                       return
+                   }
+                   
+                   let range = (5..<data.count)
+                   let newData = data.subdata(in: range) /* subset response data! */
+                   print(String(data: newData, encoding: .utf8)!)
+                   
+                   do {
+                       let decoder = JSONDecoder()
+                       let decoded = try decoder.decode(LoginResponse.self, from: newData)
+                       let accountId = decoded.account.key
+                    self.Endpoints.Auth.accountKey = accountId!
+                       print("\(String(describing: accountId))")
+                       completion(true, nil)
+                       
+                   } catch let error {
+                       print(error.localizedDescription)
+                       completion(false, nil)
+                   }
+               }
+               task.resume()
  
        
     }
@@ -188,12 +198,12 @@ class UdacityAPI {
        }
        
     class func postStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {
-           taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(accountKey: Endpoints.Auth.accountKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
-                   completion(error == nil, error)
-               }
-               
-               
-           }
+             taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(accountKey: Endpoints.Auth.accountKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
+                     completion(error == nil, error)
+                 }
+                 
+                 
+             }
        
        class func logout(completion: @escaping (Bool, Error?) -> Void) {
            let _ = taskForDELETERequest(url: Endpoints.logout.url, response: LogoutResponse.self) { (response, error) in

@@ -14,7 +14,7 @@ struct LoginResponse: Codable {
 }
 
 struct Account: Codable {
-    let register: Bool
+    let register: Bool?
     let key: String?
 }
 
@@ -28,8 +28,6 @@ struct PostLocationResponse: Codable {
     
     let createdAt: String
     let objectId: String
-    
-    
     
 }
 
