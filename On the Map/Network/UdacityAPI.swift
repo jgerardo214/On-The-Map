@@ -13,8 +13,9 @@ import MapKit
 
 class UdacityAPI {
     
-    
-    
+    static var shared = UdacityAPI()
+    var firstName = ""
+    var lastName = ""
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
@@ -109,23 +110,15 @@ class UdacityAPI {
                     newData = newData.subdata(in: range) /* subset response data! */
                 }
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
+               
                 do {
                     let responseObject = try decoder.decode(PostLocationResponse.self, from: newData)
                     DispatchQueue.main.async {
                         completion((responseObject as! ResponseType), nil)
                     }
                 } catch {
-                    do {
-                        let errorResponse = try decoder.decode(ErrorResponse.self, from: newData)
-                        DispatchQueue.main.async {
-                            completion(nil, errorResponse)
-                        }
-                    } catch {
-                        DispatchQueue.main.async {
-                            completion(nil, ErrorMessage(message: error.localizedDescription ))
-                        }
-                    }
+                    completion(nil, ErrorMessage(message: error.localizedDescription ))
                 }
             }
             task.resume()
@@ -198,7 +191,7 @@ class UdacityAPI {
        }
        
     class func postStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {
-             taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(accountKey: Endpoints.Auth.accountKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
+             taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(uniqueKey: Endpoints.Auth.accountKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
                      completion(error == nil, error)
                  }
                  
@@ -217,11 +210,15 @@ class UdacityAPI {
         let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: true, response: UserResponse.self) { (response, error) in
             if let response = response {
                 completion(response.firstName, response.lastName, nil)
+                
+                UdacityAPI.shared.firstName = response.firstName
+                UdacityAPI.shared.lastName = response.lastName
             } else {
                 completion(nil, nil, error)
             }
         }
     }
     
+   
 
 }

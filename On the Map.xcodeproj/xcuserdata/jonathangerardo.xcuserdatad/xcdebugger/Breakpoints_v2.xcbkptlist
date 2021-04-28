@@ -14,13 +14,13 @@
             filePath = "On the Map/Network/UdacityAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "taskForGETRequest(url:removeFirstCharacters:response:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "A050875B-665E-4898-9656-52F31335AB90 - 75e6dddd83c03930"
+                  uuid = "A050875B-665E-4898-9656-52F31335AB90 - 75e6dddd83c03957"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -30,12 +30,12 @@
                   urlString = "file:///Users/jonathangerardo/Desktop/On%20the%20Map_/On-The-Map/On%20the%20Map/Network/UdacityAPI.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
                   offsetFromSymbolStart = "307">
                </Location>
                <Location
-                  uuid = "A050875B-665E-4898-9656-52F31335AB90 - 3c82fc349304b79f"
+                  uuid = "A050875B-665E-4898-9656-52F31335AB90 - 3c82fc349304b7be"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -45,8 +45,8 @@
                   urlString = "file:///Users/jonathangerardo/Desktop/On%20the%20Map_/On-The-Map/On%20the%20Map/Network/UdacityAPI.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
                   offsetFromSymbolStart = "552">
                </Location>
             </Locations>
@@ -55,7 +55,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C531F44B-17E1-407C-80E8-315E669BA1F9"
+            uuid = "0273DB72-2A81-4222-AECF-2B15E9D510E2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -64,54 +64,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "99"
             endingLineNumber = "99"
-            landmarkName = "taskForPOSTRequest(url:removeFirstCharacters:responseType:body:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C531F44B-17E1-407C-80E8-315E669BA1F9 - 1764be31ddb75763"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static On_the_Map.UdacityAPI.taskForPOSTRequest&lt;A, B where A: Swift.Encodable, B: Swift.Decodable&gt;(url: Foundation.URL, removeFirstCharacters: Swift.Bool, responseType: B.Type, body: A, completion: (Swift.Optional&lt;B&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "On the Map"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jonathangerardo/Desktop/On%20the%20Map_/On-The-Map/On%20the%20Map/Network/UdacityAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "1028">
-               </Location>
-               <Location
-                  uuid = "C531F44B-17E1-407C-80E8-315E669BA1F9 - 29e566c5104be422"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in static On_the_Map.UdacityAPI.taskForPOSTRequest&lt;A, B where A: Swift.Encodable, B: Swift.Decodable&gt;(url: Foundation.URL, removeFirstCharacters: Swift.Bool, responseType: B.Type, body: A, completion: (Swift.Optional&lt;B&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "On the Map"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jonathangerardo/Desktop/On%20the%20Map_/On-The-Map/On%20the%20Map/Network/UdacityAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100"
-                  offsetFromSymbolStart = "520">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DC22F584-1C40-4224-BE48-88F10D00107D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "On the Map/Network/UdacityAPI.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
             landmarkName = "taskForPOSTRequest(url:removeFirstCharacters:responseType:body:completion:)"
             landmarkType = "7">
          </BreakpointContent>

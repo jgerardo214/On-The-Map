@@ -56,6 +56,7 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
         } else {
             let submitVC = storyboard?.instantiateViewController(identifier: "LocationFinalizedVC") as! LocationFinalizedVC
             submitVC.locationRetrieved = locationField.text
+            submitVC.urlRetrieved = linkField.text
             self.present(submitVC, animated: true, completion: nil)
         }
         
@@ -64,6 +65,9 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
         
     }
  
+    private func updateViews() {
+        
+    }
     
     
     func showFailure(title: String, message: String) {

@@ -14,7 +14,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var mediaURL: UILabel!
 }
 
-class TableView: UITableViewController {
+class MapTableViewController: UITableViewController {
     
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     
@@ -67,6 +67,14 @@ class TableView: UITableViewController {
             showFailure(title: "Logout Failed", message: "An Error has occured. Try again.")
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination == LocationFinalizedVC.self as? UIViewController {
+            
+        }
+    }
+    
+    @IBAction func unwindLoginSegue(segue: UIStoryboardSegue) { }
     
     func handleStudentLocationsResponse(locations: [StudentLocation], error: Error?) {
         refreshButton.isEnabled = true

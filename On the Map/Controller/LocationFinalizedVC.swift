@@ -18,6 +18,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     
     private var presentingController : UIViewController?
+    
     var firstName: String = ""
     var lastName: String = ""
     var latitude: Float = 0.0
@@ -33,7 +34,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         searchLocation()
         self.navigationController?.navigationBar.isHidden = false
-        
+        navigationController?.dismiss(animated: true, completion: nil)
         
     }
     
@@ -80,7 +81,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     @IBAction func finishButtonPressed(_ sender: Any) {
         
-        UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+        UdacityAPI.postStudentLocation(firstName: UdacityAPI.shared.firstName, lastName: UdacityAPI.shared.lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
     }
         
         
@@ -130,9 +131,13 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     }
     
     func handlePostStudentResponse(success: Bool, error: Error?) {
+        let postStudent =  UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
         if success {
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapTableView")
+            self.present(mainTabController, animated: true, completion: nil)
+           
         } else {
+            print(postStudent)
             showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
         }
     }

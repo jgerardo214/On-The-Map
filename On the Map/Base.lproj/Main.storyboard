@@ -33,7 +33,7 @@
         <!--On The Map-->
         <scene sceneID="Yxt-Lw-Vrb">
             <objects>
-                <tableViewController id="LI3-PC-5Wa" customClass="TableView" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MapTableView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LI3-PC-5Wa" customClass="MapTableViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vQg-hf-ldi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,7 +114,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="refreshButton" destination="eor-0m-SJn" id="FqA-gc-O17"/>
-                        <segue destination="HX3-Jz-JoD" kind="presentation" identifier="NavController" id="0dd-Ns-UGM"/>
+                        <segue destination="z1V-SJ-9fj" kind="presentation" identifier="NavController" modalPresentationStyle="fullScreen" id="a1i-oA-fT1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9YL-we-TCT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -283,39 +283,19 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="oGk-Fm-3Vc" id="UbG-Nf-28B"/>
-                        <segue destination="HX3-Jz-JoD" kind="presentation" identifier="NavController" id="IC1-RF-xSB"/>
+                        <segue destination="z1V-SJ-9fj" kind="presentation" identifier="mapToInfo" modalPresentationStyle="fullScreen" id="4pN-xb-qzx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZnR-HG-09e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2476.811594202899" y="1045.9821428571429"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="D1Y-lv-uDb">
-            <objects>
-                <navigationController id="HX3-Jz-JoD" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="adQ-KL-hkf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Tpb-Zp-DsR">
-                        <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="z1V-SJ-9fj" kind="presentation" identifier="informationPosting" id="l1J-qb-U4j"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g1Y-fz-Xqo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3909" y="495"/>
-        </scene>
         <!--InformationPostingVC-->
         <scene sceneID="Pmy-B4-5OR">
             <objects>
                 <viewController storyboardIdentifier="InformationPostingVC" id="z1V-SJ-9fj" userLabel="InformationPostingVC" customClass="InformationPostingVC" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rt3-Je-ytU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="Ime-ZC-ZPl">
@@ -325,17 +305,17 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a1A-gt-ZFz">
-                                <rect key="frame" x="41" y="300" width="323" height="34"/>
+                                <rect key="frame" x="41" y="354" width="323" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="McM-DP-EGr">
-                                <rect key="frame" x="41" y="342" width="323" height="34"/>
+                                <rect key="frame" x="41" y="396" width="323" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NyX-nL-IO4">
-                                <rect key="frame" x="41" y="401" width="323" height="30"/>
+                                <rect key="frame" x="41" y="455" width="323" height="30"/>
                                 <color key="backgroundColor" name="AccentColor"/>
                                 <state key="normal" title="FIND LOCATION">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -444,7 +424,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="IC1-RF-xSB"/>
+        <segue reference="a1i-oA-fT1"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>
