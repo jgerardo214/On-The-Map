@@ -22,6 +22,11 @@ class MapTableViewController: UITableViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
+    }
+    
     
     // MARK: - TableView methods
     

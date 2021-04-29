@@ -161,7 +161,7 @@ class UdacityAPI {
                        let decoded = try decoder.decode(LoginResponse.self, from: newData)
                        let accountId = decoded.account.key
                     self.Endpoints.Auth.accountKey = accountId!
-                       print("\(String(describing: accountId))")
+                       print("Account Key is \(String(describing: accountId))")
                        completion(true, nil)
                        
                    } catch let error {
@@ -191,7 +191,7 @@ class UdacityAPI {
        }
        
     class func postStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {
-             taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(uniqueKey: Endpoints.Auth.accountKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
+        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(uniqueKey: Endpoints.Auth.accountKey, firstName: UdacityAPI.shared.firstName, lastName: UdacityAPI.shared.lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
                      completion(error == nil, error)
                  }
                  
@@ -210,9 +210,8 @@ class UdacityAPI {
         let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: true, response: UserResponse.self) { (response, error) in
             if let response = response {
                 completion(response.firstName, response.lastName, nil)
-                
-                UdacityAPI.shared.firstName = response.firstName
-                UdacityAPI.shared.lastName = response.lastName
+                //UdacityAPI.shared.firstName = response.firstName
+                //UdacityAPI.shared.lastName = response.lastName
             } else {
                 completion(nil, nil, error)
             }
