@@ -128,7 +128,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     func handlePublicUserData(firstName: String?, lastName: String?, error: Error?) {
         if error == nil {
-            UdacityAPI.postStudentLocation(firstName: UdacityAPI.shared.firstName, lastName: UdacityAPI.shared.lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+            UdacityAPI.postStudentLocation(firstName: UdacityAPI.shared.firstName, lastName: UdacityAPI.shared.lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: self.latitude, longitude: self.longitude, completion: handlePostStudentResponse(success:error:))
             
         } else {
             showFailure(title: "There was an error!", message: error?.localizedDescription ?? "")

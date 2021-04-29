@@ -24,7 +24,8 @@ class MapTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
+        //UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
+        tableView.reloadData()
     }
     
     
@@ -91,6 +92,7 @@ class MapTableViewController: UITableViewController {
             showFailure(title: "No location found", message: error?.localizedDescription ?? "")
         }
     }
+    
     
     func showFailure(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
