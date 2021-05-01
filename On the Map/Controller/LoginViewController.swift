@@ -118,6 +118,7 @@ class LoginViewController: UIViewController {
     }
     
     func fieldsChecker() {
+        
        if (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)!  {
            DispatchQueue.main.async {
                let alert = UIAlertController(title: "Credentials were not filled in", message: "Please fill both email and password", preferredStyle: .alert)

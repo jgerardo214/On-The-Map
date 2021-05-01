@@ -16,6 +16,8 @@ class UdacityAPI {
     static var shared = UdacityAPI()
     var firstName = ""
     var lastName = ""
+    var latitude = ""
+    var longitude = ""
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
@@ -65,14 +67,14 @@ class UdacityAPI {
                    }
                    return
                }
-               var newData = data
+            let newData = data
                
             //let range = 7..<data.count
                //newData = newData.subdata(in: range)
             print(String(data: newData, encoding: .utf8)!)
             
                let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            //decoder.keyDecodingStrategy = .convertFromSnakeCase
                do {
                    let responseObject = try decoder.decode(ResponseType.self, from: newData)
                    DispatchQueue.main.async {
@@ -159,6 +161,7 @@ class UdacityAPI {
                        let decoder = JSONDecoder()
                        let decoded = try decoder.decode(LoginResponse.self, from: newData)
                        let accountId = decoded.account.key
+                                
                     self.Endpoints.Auth.accountKey = accountId!
                        print("Account Key is \(String(describing: accountId))")
                        completion(true, nil)
@@ -206,11 +209,13 @@ class UdacityAPI {
       
        
     class func getPublicUserData(completion: @escaping (String?, String?, Error?) -> Void) {
-        let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: true, response: UserResponse.self) { (response, error) in
+        let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: false, response: UserResponse.self) { (response, error) in
             if let response = response {
                 completion(response.firstName, response.lastName, nil)
-                //UdacityAPI.shared.firstName = response.firstName
-                //UdacityAPI.shared.lastName = response.lastName
+                UdacityAPI.shared.firstName = response.firstName
+                UdacityAPI.shared.lastName = response.lastName
+                
+                
             } else {
                 completion(nil, nil, error)
             }
