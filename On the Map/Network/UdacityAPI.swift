@@ -67,8 +67,8 @@ class UdacityAPI {
                }
                var newData = data
                
-            let range = 5..<data.count
-               newData = newData.subdata(in: range)
+            //let range = 7..<data.count
+               //newData = newData.subdata(in: range)
             print(String(data: newData, encoding: .utf8)!)
             
                let decoder = JSONDecoder()
@@ -138,7 +138,6 @@ class UdacityAPI {
                request.httpMethod = "POST"
                request.addValue("application/json", forHTTPHeaderField: "Accept")
                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-               // encoding a JSON body from a string, can also use a Codable struct
                request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: .utf8)
                print(request)
                let session = URLSession.shared

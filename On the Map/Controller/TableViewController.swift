@@ -24,8 +24,7 @@ class MapTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
-        tableView.reloadData()
+        UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
     }
     
     

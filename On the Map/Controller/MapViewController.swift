@@ -19,7 +19,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
        
     }
     
