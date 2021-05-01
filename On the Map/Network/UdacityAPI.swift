@@ -16,8 +16,8 @@ class UdacityAPI {
     static var shared = UdacityAPI()
     var firstName = ""
     var lastName = ""
-    var latitude = ""
-    var longitude = ""
+    var latitude = 0.0
+    var longitude = 0.0
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
@@ -193,7 +193,7 @@ class UdacityAPI {
        }
        
     class func postStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {
-        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(uniqueKey: Endpoints.Auth.accountKey, firstName: UdacityAPI.shared.firstName, lastName: UdacityAPI.shared.lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
+        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(uniqueKey: Endpoints.Auth.accountKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
                      completion(error == nil, error)
                  }
                  
