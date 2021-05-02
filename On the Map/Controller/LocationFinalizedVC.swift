@@ -19,8 +19,8 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     private var presentingController : UIViewController?
     
-    var firstName: String = ""
-    var lastName: String = ""
+    var firstName: String = "\(UdacityAPI.Endpoints.Auth.firstName)"
+    var lastName: String = "\(UdacityAPI.Endpoints.Auth.lastName)"
     var latitude: Float = 0.0
     var longitude: Float = 0.0
     var mapString: String = ""
@@ -84,7 +84,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     @IBAction func finishButtonPressed(_ sender: Any) {
         
-        
+        UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
         UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
     }
     
@@ -128,7 +128,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     func handlePublicUserData(firstName: String?, lastName: String?, error: Error?) {
         if error == nil {
-            UdacityAPI.postStudentLocation(firstName: UdacityAPI.shared.firstName, lastName: UdacityAPI.shared.lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: self.latitude, longitude: self.longitude, completion: handlePostStudentResponse(success:error:))
+            UdacityAPI.postStudentLocation(firstName: self.firstName, lastName: self.lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: self.latitude, longitude: self.longitude, completion: handlePostStudentResponse(success:error:))
             
         } else {
             showFailure(title: "There was an error!", message: error?.localizedDescription ?? "")
@@ -136,15 +136,22 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     }
     
     func handlePostStudentResponse(success: Bool, error: Error?) {
-        let postStudent: () =  UdacityAPI.postStudentLocation(firstName: UdacityAPI.shared.firstName, lastName: UdacityAPI.shared.lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+        
         if success {
-            let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapTableView")
-            self.present(mainTabController, animated: true, completion: nil)
-           
-        } else {
-            //print(postStudent)
-            showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
-        }
+                   self.navigationController?.dismiss(animated: true, completion: nil)
+               } else {
+                   showFailure(title: "Not Possible to Save Information", message: error?.localizedDescription ?? "")
+               }
+        
+//        let _: () =  UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+//        if success {
+//            let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapTableView")
+//            self.present(mainTabController, animated: true, completion: nil)
+//
+//        } else {
+//            //print(postStudent)
+//            showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
+//        }
     }
     
     func showFailure(title: String, message: String) {
@@ -153,9 +160,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
-    // MARK TODO: if pin is pressed open the link the student posted
-    
-    
+
 
     
 }

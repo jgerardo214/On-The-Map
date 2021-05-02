@@ -5,6 +5,7 @@
 //  Created by Jonathan Gerardo on 3/25/21.
 //
 
+
 import Foundation
 import UIKit
 import MapKit
@@ -14,16 +15,20 @@ import MapKit
 class UdacityAPI {
     
     static var shared = UdacityAPI()
-    var firstName = ""
-    var lastName = ""
-    var latitude = 0.0
-    var longitude = 0.0
+//    var firstName = ""
+//    var lastName = ""
+//    var latitude = 0.0
+//    var longitude = 0.0
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1"
         
         struct Auth {
             static var accountKey = ""
+            static var firstName = ""
+            static var lastName = ""
+            static var latitude = 0.0
+            static var longitude = 0.0
 
             
         }
@@ -67,9 +72,9 @@ class UdacityAPI {
                    }
                    return
                }
-            let newData = data
+            var newData = data
                
-            //let range = 7..<data.count
+            //let range = 5..<data.count
                //newData = newData.subdata(in: range)
             print(String(data: newData, encoding: .utf8)!)
             
@@ -94,6 +99,7 @@ class UdacityAPI {
     
        
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, removeFirstCharacters: Bool, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void) {
+        
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -193,9 +199,9 @@ class UdacityAPI {
        }
        
     class func postStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {
-        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(uniqueKey: Endpoints.Auth.accountKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (_, error) in
-                     completion(error == nil, error)
-                 }
+        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, removeFirstCharacters: false, responseType: PostLocationResponse.self, body: PostLocationRequest(uniqueKey: Endpoints.Auth.accountKey, firstName: Endpoints.Auth.firstName, lastName: Endpoints.Auth.lastName, mapString: mapString, mediaURL: mediaURL, latitude: Float(Endpoints.Auth.latitude), longitude: Float(Endpoints.Auth.longitude))) { (_, error) in
+                             completion(error == nil, error)
+                         }
                  
                  
              }
@@ -209,11 +215,11 @@ class UdacityAPI {
       
        
     class func getPublicUserData(completion: @escaping (String?, String?, Error?) -> Void) {
-        let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: false, response: UserResponse.self) { (response, error) in
+        let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: false, response: UserData.self) { (response, error) in
             if let response = response {
                 completion(response.firstName, response.lastName, nil)
-                UdacityAPI.shared.firstName = response.firstName
-                UdacityAPI.shared.lastName = response.lastName
+                //UdacityAPI.shared.firstName = response.firstName
+                //UdacityAPI.shared.lastName = response.lastName
                 
                 
             } else {
