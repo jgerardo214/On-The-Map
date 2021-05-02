@@ -137,21 +137,16 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     func handlePostStudentResponse(success: Bool, error: Error?) {
         
-        if success {
-                   self.navigationController?.dismiss(animated: true, completion: nil)
-               } else {
-                   showFailure(title: "Not Possible to Save Information", message: error?.localizedDescription ?? "")
-               }
+       
         
-//        let _: () =  UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
-//        if success {
-//            let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapTableView")
-//            self.present(mainTabController, animated: true, completion: nil)
-//
-//        } else {
-//            //print(postStudent)
-//            showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
-//        }
+     let _: () =  UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+        if success {
+           let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapTableView")
+           self.present(mainTabController, animated: true, completion: nil)
+       } else {
+          
+           showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
+        }
     }
     
     func showFailure(title: String, message: String) {
