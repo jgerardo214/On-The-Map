@@ -8,7 +8,7 @@
 import Foundation
 
 struct PostLocation: Codable {
-    
+
     let uniqueKey: String
     let firstName: String
     let lastName: String
@@ -16,6 +16,6 @@ struct PostLocation: Codable {
     let mediaURL: String
     let latitude: Float
     let longitude: Float
-    
-    
+
+
 }

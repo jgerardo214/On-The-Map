@@ -53,16 +53,11 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         
-        
-        
         fieldsChecker()
         setLoggingIn(true)
         UdacityAPI.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
 
                 
-        
-        
-        
     }
     
     @IBAction func signupButtonPressed(_ sender: Any) {
@@ -81,13 +76,11 @@ class LoginViewController: UIViewController {
         setLoggingIn(false)
         
         
-        
         if success {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "loginSuccessful", sender: nil)
             }
         } else {
-            
             showFailure(title: "Login Failed", message: error?.localizedDescription ?? "")
         }
         

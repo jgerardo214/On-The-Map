@@ -19,8 +19,8 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     private var presentingController : UIViewController?
     
-    var firstName: String = "\(UdacityAPI.Endpoints.Auth.firstName)"
-    var lastName: String = "\(UdacityAPI.Endpoints.Auth.lastName)"
+    var firstName: String = ""
+    var lastName: String = "\(UdacityAPI.shared.lastName)"
     var latitude: Float = 0.0
     var longitude: Float = 0.0
     var mapString: String = ""
@@ -37,6 +37,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         searchLocation()
         self.navigationController?.navigationBar.isHidden = false
         navigationController?.dismiss(animated: true, completion: nil)
+        UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
         
         
     }
@@ -45,6 +46,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         super.viewDidAppear(animated)
         
         presentingController = presentingViewController
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,7 +130,8 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     func handlePublicUserData(firstName: String?, lastName: String?, error: Error?) {
         if error == nil {
-            UdacityAPI.postStudentLocation(firstName: self.firstName, lastName: self.lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: self.latitude, longitude: self.longitude, completion: handlePostStudentResponse(success:error:))
+            
+            UdacityAPI.postStudentLocation(firstName: UdacityAPI.shared.firstName, lastName: UdacityAPI.shared.lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: self.latitude, longitude: self.longitude, completion: handlePostStudentResponse(success:error:))
             
         } else {
             showFailure(title: "There was an error!", message: error?.localizedDescription ?? "")
