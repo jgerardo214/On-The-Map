@@ -65,14 +65,12 @@ class UdacityAPI {
                 }
                 return
             }
-            let newData = data
+            var newData = data
             
-            //let range = 5..<data.count
-            //newData = newData.subdata(in: range)
             print(String(data: newData, encoding: .utf8)!)
             
             let decoder = JSONDecoder()
-            //decoder.keyDecodingStrategy = .convertFromSnakeCase
+            
             do {
                 let responseObject = try decoder.decode(ResponseType.self, from: newData)
                 DispatchQueue.main.async {
@@ -208,8 +206,8 @@ class UdacityAPI {
     class func getPublicUserData(completion: @escaping (String?, String?, Error?) -> Void) {
         let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: false, response: UserData.self) { (response, error) in
             if let response = response {
-                UdacityAPI.shared.firstName = response.firstName
-                UdacityAPI.shared.lastName = response.lastName
+//                UdacityAPI.shared.firstName = response.firstName
+//                UdacityAPI.shared.lastName = response.lastName
                 completion(response.firstName, response.lastName, nil)
                 
                 

@@ -13,6 +13,7 @@ struct ResultsResponse: Codable {
 }
 
 struct StudentInformation: Codable {
+    static var lastFetched: [PostLocationResponse]?
     
     let createdAt: String?
     let firstName: String
@@ -39,5 +40,6 @@ struct StudentInformation: Codable {
         self.uniqueKey = uniqueKey
         self.updatedAt = updatedAt
     }
+    
     
 }

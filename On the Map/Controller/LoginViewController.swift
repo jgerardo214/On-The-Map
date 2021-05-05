@@ -75,7 +75,17 @@ class LoginViewController: UIViewController {
     func handleLoginResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
         
-        
+        if !success {
+            DispatchQueue.main.async {
+                let invalidAccess = UIAlertController(title: "Invalid Access", message: "Login credentials are incorrect", preferredStyle: .alert)
+                invalidAccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    return
+                }))
+                self.present(invalidAccess, animated: true, completion: nil)
+            }
+            
+        }
+       
         if success {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "loginSuccessful", sender: nil)
@@ -111,6 +121,7 @@ class LoginViewController: UIViewController {
     }
     
     func fieldsChecker() {
+        
         
        if (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)!  {
            DispatchQueue.main.async {

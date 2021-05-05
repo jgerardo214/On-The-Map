@@ -20,7 +20,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     private var presentingController : UIViewController?
     
     var firstName: String = ""
-    var lastName: String = "\(UdacityAPI.shared.lastName)"
+    var lastName: String = ""
     var latitude: Float = 0.0
     var longitude: Float = 0.0
     var mapString: String = ""
@@ -140,7 +140,6 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     func handlePostStudentResponse(success: Bool, error: Error?) {
         
-       
         
      let _: () =  UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
         if success {
