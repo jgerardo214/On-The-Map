@@ -19,8 +19,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     private var presentingController : UIViewController?
     
-    var firstName: String = ""
-    var lastName: String = ""
+   
     var latitude: Float = 0.0
     var longitude: Float = 0.0
     var mapString: String = ""
@@ -38,6 +37,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         self.navigationController?.navigationBar.isHidden = false
         navigationController?.dismiss(animated: true, completion: nil)
         UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
+        showMapAnnotation()
         
         
     }
@@ -87,8 +87,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     @IBAction func finishButtonPressed(_ sender: Any) {
         
         UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
-        
-        UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+    
     }
     
         
@@ -141,15 +140,14 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     func handlePostStudentResponse(success: Bool, error: Error?) {
         
-        
-     //let _: () =  UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
         if success {
-           let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapTableView")
+           let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController")
            self.present(mainTabController, animated: true, completion: nil)
        } else {
-          
+
            showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
         }
+      
     }
     
     func showFailure(title: String, message: String) {

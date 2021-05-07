@@ -132,7 +132,7 @@ class UdacityAPI {
     }
     
     
-    
+   
     class func login(email: String, password: String, completion: @escaping (Bool, Error?) -> ()) {
         
         var request = URLRequest(url: Endpoints.login.url)
@@ -147,31 +147,31 @@ class UdacityAPI {
                 print(error?.localizedDescription ?? "")
                 return
             }
-            
+
             guard let data = data else {
                 return
             }
-            
+
             let range = (5..<data.count)
             let newData = data.subdata(in: range) /* subset response data! */
             print(String(data: newData, encoding: .utf8)!)
-            
+
             do {
                 let decoder = JSONDecoder()
                 let decoded = try decoder.decode(LoginResponse.self, from: newData)
                 let accountId = decoded.account.key
-                
+
                 self.Endpoints.Auth.accountKey = accountId!
                 print("Account Key is \(String(describing: accountId))")
                 completion(true, nil)
-                
+
             } catch let error {
                 print(error.localizedDescription)
                 completion(false, nil)
             }
         }
         task.resume()
-        
+      
         
     }
     
@@ -210,8 +210,7 @@ class UdacityAPI {
     class func getPublicUserData(completion: @escaping (String?, String?, Error?) -> Void) {
         let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: true, response: UserResponse.self) { (response, error) in
             if let response = response {
-//                UdacityAPI.shared.firstName = response.firstName
-//                UdacityAPI.shared.lastName = response.lastName
+
                 completion(response.firstName, response.lastName, nil)
                 
                 
