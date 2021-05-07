@@ -23,16 +23,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        reloadInputViews()
-       
-    }
-    
-    
-    
-   
-    
     
     
     @IBAction func addLocationPressed(_ sender: Any) {
@@ -66,9 +56,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    func showMapPinnedLocations(_ locations: [StudentLocation]) {
-        
-        var pinnedLocation = [MKPointAnnotation]()
+    func showMapAnnotations(_ locations: [StudentLocation]) {
+        var annotations = [MKPointAnnotation]()
                
         for location in locations {
             let latitude = CLLocationDegrees(location.latitude)
@@ -79,19 +68,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let lastName = location.lastName
             let mediaURL = location.mediaURL
             
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(firstName) \(lastName)"
+            annotation.subtitle = mediaURL
             
-            let pinnedLocations = MKPointAnnotation()
-            pinnedLocations.coordinate = coordinate
-            pinnedLocations.title = "\(String(describing: firstName)) \(String(describing: lastName))"
-            pinnedLocations.subtitle = mediaURL
-            
-            pinnedLocation.append(contentsOf: pinnedLocation)
+            annotations.append(annotation)
         }
         
-        self.mapView.addAnnotations(pinnedLocation)
-        
-        
+        self.mapView.addAnnotations(annotations)
     }
+    
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
@@ -111,7 +98,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 self.mapView.removeAnnotations(self.mapView.annotations)
             }
             appDelegate.studentLocations = locations
-            showMapPinnedLocations(locations)
+            showMapAnnotations(locations)
         } else {
             showFailure(title: "Get Student Locations Failed", message: error?.localizedDescription ?? "")
         }

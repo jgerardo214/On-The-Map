@@ -87,6 +87,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     @IBAction func finishButtonPressed(_ sender: Any) {
         
         UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
+        
         UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
     }
     
@@ -131,7 +132,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     func handlePublicUserData(firstName: String?, lastName: String?, error: Error?) {
         if error == nil {
             
-            UdacityAPI.postStudentLocation(firstName: UdacityAPI.shared.firstName, lastName: UdacityAPI.shared.lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: self.latitude, longitude: self.longitude, completion: handlePostStudentResponse(success:error:))
+            UdacityAPI.postStudentLocation(firstName: firstName!, lastName: lastName!, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: self.latitude, longitude: self.longitude, completion: handlePostStudentResponse(success:error:))
             
         } else {
             showFailure(title: "There was an error!", message: error?.localizedDescription ?? "")
@@ -141,7 +142,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     func handlePostStudentResponse(success: Bool, error: Error?) {
         
         
-     let _: () =  UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
+     //let _: () =  UdacityAPI.postStudentLocation(firstName: firstName, lastName: lastName, mapString: self.locationRetrieved, mediaURL: self.urlRetrieved, latitude: latitude, longitude: longitude, completion: handlePostStudentResponse(success:error:))
         if success {
            let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapTableView")
            self.present(mainTabController, animated: true, completion: nil)

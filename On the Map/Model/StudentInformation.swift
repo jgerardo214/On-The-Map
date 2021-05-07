@@ -8,7 +8,7 @@
 import Foundation
 
 struct ResultsResponse: Codable {
-    let results : [PostLocationResponse]
+    let results : [StudentInformation]
 
 }
 
