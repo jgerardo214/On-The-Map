@@ -32,11 +32,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     
     override func viewDidLoad() {
-        mapView.delegate = self
         searchLocation()
-        self.navigationController?.navigationBar.isHidden = false
-        navigationController?.dismiss(animated: true, completion: nil)
-        UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
         showMapAnnotation()
         
         
