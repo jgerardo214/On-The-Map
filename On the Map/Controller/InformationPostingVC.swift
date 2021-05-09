@@ -52,13 +52,8 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
-            let submitVC = storyboard?.instantiateViewController(identifier: "LocationFinalizedVC") as! LocationFinalizedVC
-            submitVC.locationRetrieved = locationField.text
-            submitVC.urlRetrieved = linkField.text
-            submitVC.latitude = self.latitude
-            submitVC.longitude = self.longitude
-            self.present(submitVC, animated: true, completion: nil)
             
+
             geocoder.geocodeAddressString(locationField.text ?? "") { placemarks, error in
                 self.processResponse(withPlacemarks: placemarks, error: error)
             }
@@ -76,6 +71,14 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
                 let coordinate = location.coordinate
                 self.latitude = Float(coordinate.latitude)
                 self.longitude = Float(coordinate.longitude)
+                
+                let submitVC = storyboard?.instantiateViewController(identifier: "LocationFinalizedVC") as! LocationFinalizedVC
+                submitVC.locationRetrieved = locationField.text
+                submitVC.urlRetrieved = linkField.text
+                submitVC.latitude = self.latitude
+                submitVC.longitude = self.longitude
+                self.present(submitVC, animated: true, completion: nil)
+                
                                 
             } else {
                 showFailure(title: "Location Not Well Specified", message: "Try to use the full location name (Ex: California, USA).")
