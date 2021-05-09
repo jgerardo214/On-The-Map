@@ -32,8 +32,6 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.tabBarController?.tabBar.isHidden = false
         subscribeToKeyboardNotifications()
         
         
@@ -57,16 +55,32 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
             let submitVC = storyboard?.instantiateViewController(identifier: "LocationFinalizedVC") as! LocationFinalizedVC
             submitVC.locationRetrieved = locationField.text
             submitVC.urlRetrieved = linkField.text
+            submitVC.latitude = self.latitude
+            submitVC.longitude = self.longitude
             self.present(submitVC, animated: true, completion: nil)
+            
+            geocoder.geocodeAddressString(locationField.text ?? "") { placemarks, error in
+                self.processResponse(withPlacemarks: placemarks, error: error)
+            }
         }
         
 
-        
-        
     }
  
-    private func updateViews() {
-        
+    func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
+        if error != nil {
+            showFailure(title: "Location Do Not Exist", message: "The informed location doesn't exist.")
+        } else {
+            if let placemarks = placemarks, placemarks.count > 0 {
+                let location = (placemarks.first?.location)! as CLLocation
+                let coordinate = location.coordinate
+                self.latitude = Float(coordinate.latitude)
+                self.longitude = Float(coordinate.longitude)
+                                
+            } else {
+                showFailure(title: "Location Not Well Specified", message: "Try to use the full location name (Ex: California, USA).")
+            }
+        }
     }
     
     
@@ -78,7 +92,11 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
+    
+    
     // MARK: Keyboard Functions
+    
+    
     @objc func keyboardWillShow(_ notification:Notification) {
         if !keyboardIsVisible {
             if locationField.isEditing {

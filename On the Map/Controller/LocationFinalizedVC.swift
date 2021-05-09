@@ -33,7 +33,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         searchLocation()
-        showMapAnnotation()
+        
         
         
     }
@@ -77,30 +77,13 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         return pinView
     }
     
-
-    
     
     @IBAction func finishButtonPressed(_ sender: Any) {
-        
         UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
-    
     }
     
         
         
-    
-    func showMapAnnotation() {
-        let latitude = CLLocationDegrees(self.latitude)
-        let longitude = CLLocationDegrees(self.longitude)
-        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = self.mapString
-
-        mapView.addAnnotation(annotation)
-        mapView.selectAnnotation(annotation, animated: true)
-    }
     
     func searchLocation(){
             let searchRequest = MKLocalSearch.Request()

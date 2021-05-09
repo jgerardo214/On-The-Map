@@ -126,9 +126,40 @@ class UdacityAPI {
     }
     
     class func taskForDELETERequest<ResponseType: Decodable>(url: URL, response: ResponseType.Type, completion: @escaping (Bool, Error?) -> Void) -> URLSessionTask {
-        taskForDELETERequest(url: Endpoints.logout.url, response: LogoutResponse.self) { (response, error) in
-            completion(response, error)
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+          if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
         }
+        if let xsrfCookie = xsrfCookie {
+          request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+                return
+            }
+            let range = 5..<data.count
+            let newData = data.subdata(in: range)
+            let decoder = JSONDecoder()
+            do {
+                _ = try decoder.decode(ResponseType.self, from: newData)
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(false, ErrorMessage(message: "Logout has failed. Try again."))
+                }
+            }
+        }
+        task.resume()
+        
+        return task
     }
     
     
@@ -175,12 +206,7 @@ class UdacityAPI {
         
     }
     
-    
-    
-    
     class func getStudentLocation(completion: @escaping ([StudentLocation], Error?) -> Void) {
-        
-        
         
         let _ = taskForGETRequest(url: Endpoints.getStudentLocation.url, removeFirstCharacters: false, response: StudentLocationResults.self) { (response, error) in
             if let response = response {
@@ -189,8 +215,6 @@ class UdacityAPI {
                 completion([], ErrorMessage(message: "There was an error. Try again."))
             }
         }
-        
-        
     }
     
     class func postStudentLocation(firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Float, longitude: Float, completion: @escaping (Bool, Error?) -> Void) {
@@ -210,11 +234,7 @@ class UdacityAPI {
     class func getPublicUserData(completion: @escaping (String?, String?, Error?) -> Void) {
         let _ = taskForGETRequest(url: Endpoints.getUserData.url, removeFirstCharacters: true, response: UserResponse.self) { (response, error) in
             if let response = response {
-
                 completion(response.firstName, response.lastName, nil)
-                
-                
-                
             } else {
                 completion(nil, nil, error)
             }

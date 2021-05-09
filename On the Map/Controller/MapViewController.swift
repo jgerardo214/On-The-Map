@@ -121,8 +121,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
 
     @IBAction func logoutButtonPressed(_ sender: Any) {
+        UdacityAPI.logout(completion: handleLogoutResponse(success:error:))
         self.dismiss(animated: true, completion: nil)
     }
+    
     
 }
 
