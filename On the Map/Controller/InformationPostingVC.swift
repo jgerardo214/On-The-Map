@@ -14,7 +14,7 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var linkField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var presentingController: UIViewController?
     var geocoder = CLGeocoder()
@@ -27,6 +27,8 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         locationField.delegate = self
         linkField.delegate = self
+        self.activityIndicator.isHidden = true
+        self.activityIndicator.hidesWhenStopped = true
         
     }
     
@@ -52,8 +54,6 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
-            
-
             geocoder.geocodeAddressString(locationField.text ?? "") { placemarks, error in
                 self.processResponse(withPlacemarks: placemarks, error: error)
             }
@@ -77,9 +77,10 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
                 submitVC.urlRetrieved = linkField.text
                 submitVC.latitude = self.latitude
                 submitVC.longitude = self.longitude
+                
                 self.present(submitVC, animated: true, completion: nil)
                 
-                                
+               
             } else {
                 showFailure(title: "Location Not Well Specified", message: "Try to use the full location name (Ex: California, USA).")
             }
@@ -94,6 +95,8 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+    
+ 
     
     
     
