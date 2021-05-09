@@ -80,6 +80,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     @IBAction func finishButtonPressed(_ sender: Any) {
         UdacityAPI.getPublicUserData(completion: handlePublicUserData(firstName:lastName:error:))
+        
     }
     
         
@@ -120,10 +121,12 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     func handlePostStudentResponse(success: Bool, error: Error?) {
         
         if success {
-           let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController")
-           self.present(mainTabController, animated: true, completion: nil)
+//           let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController")
+//           self.present(mainTabController, animated: true, completion: nil)
+            
+                self.performSegue(withIdentifier: "returnToLogin", sender: nil)
+           
        } else {
-
            showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
         }
       

@@ -35,7 +35,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MapTableView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LI3-PC-5Wa" customClass="MapTableViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vQg-hf-ldi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -368,16 +368,16 @@
         <!--LocationFinalizedVC-->
         <scene sceneID="TCF-Wc-JRh">
             <objects>
-                <viewController storyboardIdentifier="LocationFinalizedVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4P5-bb-TSp" userLabel="LocationFinalizedVC" customClass="LocationFinalizedVC" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationFinalizedVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4P5-bb-TSp" userLabel="LocationFinalizedVC" customClass="LocationFinalizedVC" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S04-BQ-MAI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f3a-MH-cBf">
-                                <rect key="frame" x="0.0" y="56" width="414" height="795"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="741"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MA7-7v-zkk">
-                                <rect key="frame" x="20" y="714" width="374" height="30"/>
+                                <rect key="frame" x="20" y="660" width="374" height="30"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
                                 <state key="normal" title="Finish">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -404,6 +404,7 @@
                         <outlet property="finishButton" destination="MA7-7v-zkk" id="E8m-fG-EmI"/>
                         <outlet property="mapView" destination="f3a-MH-cBf" id="Mdp-1L-DLy"/>
                         <outlet property="navbar" destination="pIL-Kk-Y7t" id="Yh8-0l-clS"/>
+                        <segue destination="VVX-31-lVz" kind="show" identifier="returnToLogin" id="HXv-Nj-6w4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ou2-M6-VWS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -430,6 +431,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="a1i-oA-fT1"/>
+        <segue reference="HXv-Nj-6w4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>
