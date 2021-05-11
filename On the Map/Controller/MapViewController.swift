@@ -20,18 +20,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
+        mapView.delegate = self
         
     }
     
     
     
     @IBAction func addLocationPressed(_ sender: Any) {
-        
         let informationPostingVC = storyboard?.instantiateViewController(withIdentifier: "InformationPostingVC") as! InformationPostingVC
         present(informationPostingVC, animated: true, completion: nil)
-        
-        
-        }
+    }
     
     @IBAction func refreshButtonPressed(_ sender: Any) {
         UdacityAPI.getStudentLocation(completion: handleStudentLocationsResponse(locations:error:))
@@ -42,7 +40,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let reuseId = "pin"
         
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-
+        
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
@@ -58,7 +56,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func showMapAnnotations(_ locations: [StudentLocation]) {
         var annotations = [MKPointAnnotation]()
-               
+        
         for location in locations {
             let latitude = CLLocationDegrees(location.latitude)
             let longitude = CLLocationDegrees(location.longitude)
@@ -88,7 +86,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-   
+    
     
     func handleStudentLocationsResponse(locations: [StudentLocation], error: Error?) {
         
@@ -119,7 +117,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-
+    
     @IBAction func logoutButtonPressed(_ sender: Any) {
         UdacityAPI.logout(completion: handleLogoutResponse(success:error:))
         self.dismiss(animated: true, completion: nil)

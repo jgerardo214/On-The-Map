@@ -35,7 +35,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MapTableView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LI3-PC-5Wa" customClass="MapTableViewController" customModule="On_the_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vQg-hf-ldi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -404,7 +404,6 @@
                         <outlet property="finishButton" destination="MA7-7v-zkk" id="E8m-fG-EmI"/>
                         <outlet property="mapView" destination="f3a-MH-cBf" id="Mdp-1L-DLy"/>
                         <outlet property="navbar" destination="pIL-Kk-Y7t" id="Yh8-0l-clS"/>
-                        <segue destination="VVX-31-lVz" kind="show" identifier="returnToLogin" id="HXv-Nj-6w4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ou2-M6-VWS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -430,8 +429,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="a1i-oA-fT1"/>
-        <segue reference="HXv-Nj-6w4"/>
+        <segue reference="4pN-xb-qzx"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>

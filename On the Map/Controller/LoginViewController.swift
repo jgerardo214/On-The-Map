@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
         self.activityIndicator.isHidden = true
         self.activityIndicator.hidesWhenStopped = true
         
-      
+        
         
         
     }
@@ -56,8 +56,8 @@ class LoginViewController: UIViewController {
         fieldsChecker()
         setLoggingIn(true)
         UdacityAPI.login(email: self.emailTextField.text ?? "", password: self.passwordTextField.text ?? "", completion: handleLoginResponse(success:error:))
-
-                
+        
+        
     }
     
     @IBAction func signupButtonPressed(_ sender: Any) {
@@ -80,7 +80,7 @@ class LoginViewController: UIViewController {
             }
             
         }
-       
+        
         if success {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "loginSuccessful", sender: nil)
@@ -103,10 +103,10 @@ class LoginViewController: UIViewController {
             self.loginButton.isEnabled = !loggingIn
         }
         
-         
-      
         
-       
+        
+        
+        
     }
     
     func showFailure(title: String, message: String) {
@@ -118,18 +118,18 @@ class LoginViewController: UIViewController {
     func fieldsChecker() {
         
         
-       if (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)!  {
-           DispatchQueue.main.async {
-               let alert = UIAlertController(title: "Credentials were not filled in", message: "Please fill both email and password", preferredStyle: .alert)
-               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-               self.present(alert, animated: true, completion: nil)
-           }
-        
-
-       } else {
-           setLoggingIn(true)
-       }
-   }
+        if (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)!  {
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: "Credentials were not filled in", message: "Please fill both email and password", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+            
+        } else {
+            setLoggingIn(true)
+        }
+    }
     
     // Function called when keyboard must be shown and the screen must be moved up
     @objc func keyboardWillShow(_ notification:Notification) {
@@ -151,7 +151,7 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self)
     }

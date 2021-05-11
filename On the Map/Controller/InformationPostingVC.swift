@@ -59,9 +59,9 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
             }
         }
         
-
+        
     }
- 
+    
     func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
         if error != nil {
             showFailure(title: "Location Do Not Exist", message: "The informed location doesn't exist.")
@@ -80,7 +80,7 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
                 
                 self.present(submitVC, animated: true, completion: nil)
                 
-               
+                
             } else {
                 showFailure(title: "Location Not Well Specified", message: "Try to use the full location name (Ex: California, USA).")
             }
@@ -96,7 +96,7 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
- 
+    
     
     
     

@@ -19,13 +19,13 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     
     private var presentingController : UIViewController?
     
-   
+    
     var latitude: Float = 0.0
     var longitude: Float = 0.0
     var mapString: String = ""
     var mediaURL: String = ""
     var postLocationData: PostLocation?
- 
+    
     
     var locationRetrieved: String!
     var urlRetrieved: String!
@@ -65,7 +65,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         let reuseId = "pin"
         
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-
+        
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
@@ -83,30 +83,30 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         
     }
     
-        
-        
+    
+    
     
     func searchLocation(){
-            let searchRequest = MKLocalSearch.Request()
-            searchRequest.naturalLanguageQuery = locationRetrieved
-            let search = MKLocalSearch(request: searchRequest)
-            search.start { (response, error) in
-                guard let response = response else {
-                    let alertVC = UIAlertController(title: "Location not found.", message: "Please input another location.", preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in self.navigationController?.popViewController(animated: true)}))
-                    self.present(alertVC, animated: true, completion: nil)
-                    return
-                }
-                
-                let pin = MKPointAnnotation()
-                pin.coordinate = response.mapItems[0].placemark.coordinate
-                pin.title = response.mapItems[0].name
-                self.mapView.addAnnotation(pin)
-                self.mapView.setCenter(pin.coordinate, animated: true)
-                let region = MKCoordinateRegion(center: pin.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-                self.mapView.setRegion(region, animated: true)
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = locationRetrieved
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { (response, error) in
+            guard let response = response else {
+                let alertVC = UIAlertController(title: "Location not found.", message: "Please input another location.", preferredStyle: .alert)
+                alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: {_ in self.navigationController?.popViewController(animated: true)}))
+                self.present(alertVC, animated: true, completion: nil)
+                return
             }
+            
+            let pin = MKPointAnnotation()
+            pin.coordinate = response.mapItems[0].placemark.coordinate
+            pin.title = response.mapItems[0].name
+            self.mapView.addAnnotation(pin)
+            self.mapView.setCenter(pin.coordinate, animated: true)
+            let region = MKCoordinateRegion(center: pin.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.mapView.setRegion(region, animated: true)
         }
+    }
     
     func handlePublicUserData(firstName: String?, lastName: String?, error: Error?) {
         if error == nil {
@@ -121,15 +121,15 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
     func handlePostStudentResponse(success: Bool, error: Error?) {
         
         if success {
-//           let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController")
-//           self.present(mainTabController, animated: true, completion: nil)
+            let mainTabController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController")
+            self.present(mainTabController, animated: true, completion: nil)
             
-                self.performSegue(withIdentifier: "returnToLogin", sender: nil)
-           
-       } else {
-           showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
+            
+            
+        } else {
+            showFailure(title: "Unable to Save Information", message: error?.localizedDescription ?? "")
         }
-      
+        
     }
     
     func showFailure(title: String, message: String) {
@@ -138,7 +138,7 @@ class LocationFinalizedVC: UIViewController, MKMapViewDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
-
-
+    
+    
     
 }

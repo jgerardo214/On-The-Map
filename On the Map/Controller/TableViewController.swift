@@ -35,7 +35,7 @@ class MapTableViewController: UITableViewController {
         
         return appDelegate.studentLocations.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell") as! TableViewCell
@@ -51,7 +51,7 @@ class MapTableViewController: UITableViewController {
             app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
         }
     }
-   
+    
     @IBAction func logoutButtonPressed(_ sender: Any) {
         
         UdacityAPI.logout(completion: handleLogoutResponse(success:error:))
@@ -101,6 +101,6 @@ class MapTableViewController: UITableViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
-
-     
- }
+    
+    
+}
