@@ -70,7 +70,8 @@ class LoginViewController: UIViewController {
     func handleLoginResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
         
-        if !success {
+        switch success {
+        case success == nil:
             DispatchQueue.main.async {
                 let invalidAccess = UIAlertController(title: "Unable to login", message: "Login credentials are incorrect", preferredStyle: .alert)
                 invalidAccess.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -78,16 +79,14 @@ class LoginViewController: UIViewController {
                 }))
                 self.present(invalidAccess, animated: true, completion: nil)
             }
-            
-        }
-        
-        if success {
+        case success:
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "loginSuccessful", sender: nil)
             }
-        } else {
+        default:
             showFailure(title: "Login Failed", message: error?.localizedDescription ?? "")
         }
+        
         
     }
     

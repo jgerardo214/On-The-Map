@@ -29,17 +29,12 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
         linkField.delegate = self
         self.activityIndicator.isHidden = true
         self.activityIndicator.hidesWhenStopped = true
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         subscribeToKeyboardNotifications()
-        
-        
     }
-    
-    
     
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -54,6 +49,7 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
+            handleActivityIndicator(true)
             geocoder.geocodeAddressString(locationField.text ?? "") { placemarks, error in
                 self.processResponse(withPlacemarks: placemarks, error: error)
             }
@@ -64,6 +60,7 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
     
     func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
         if error != nil {
+            handleActivityIndicator(false)
             showFailure(title: "Location Do Not Exist", message: "The informed location doesn't exist.")
         } else {
             if let placemarks = placemarks, placemarks.count > 0 {
@@ -71,6 +68,7 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
                 let coordinate = location.coordinate
                 self.latitude = Float(coordinate.latitude)
                 self.longitude = Float(coordinate.longitude)
+                handleActivityIndicator(false)
                 
                 let submitVC = storyboard?.instantiateViewController(identifier: "LocationFinalizedVC") as! LocationFinalizedVC
                 submitVC.locationRetrieved = locationField.text
@@ -82,6 +80,7 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
                 
                 
             } else {
+                handleActivityIndicator(false)
                 showFailure(title: "Location Not Well Specified", message: "Try to use the full location name (Ex: California, USA).")
             }
         }
@@ -95,6 +94,15 @@ class InformationPostingVC: UIViewController, UITextFieldDelegate {
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+    
+    func handleActivityIndicator(_ isFinding: Bool) {
+        if isFinding {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+
     
     
     
